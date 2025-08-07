@@ -22,7 +22,6 @@ const personalInfo = {
     "https://drive.google.com/file/d/1Zo9k3T3tXdwudKpH_VhQyiGkkIjYkH0N/view?usp=sharing",
   githubUrl: "https://github.com/Ronakjain07",
   linkedinUrl: "https://www.linkedin.com/in/ronak-jain-rj07/",
-  insta: "https://www.instagram.com/ronak_jainnn",
   email: "ronaktjain07@gmail.com",
   phone: "+91 9328087529",
   projects: [
@@ -30,25 +29,25 @@ const personalInfo = {
       name: "JTM Inventory Manager | ReactJS, HTML, CSS, Vercel",
       link: "https://jtm-inventory-manager.vercel.app/",
       description: `
-  • Developed a responsive web app to manage cloth stock flow by quality, improving inventory accuracy by 40%.<br/>
-  • Designed clean, modular React components with dashboard views for real-time tracking.<br/>
-  • Enhanced usability for factory teams through intuitive UI/UX and mobile-friendly layouts.`,
+  - Developed a responsive web app to manage cloth stock flow by quality, improving inventory accuracy by 40%.<br/>
+  - Designed clean, modular React components with dashboard views for real-time tracking.<br/>
+  - Enhanced usability for factory teams through intuitive UI/UX and mobile-friendly layouts.`,
     },
     {
       name: "Secure RFID Vehicle Access + Live Monitoring | Arduino, Node.js, C++, RFID Module",
       link: "",
       description: `
-  • Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.<br/>
-  • Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.<br/>
-  • Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
+  - Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.<br/>
+  - Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.<br/>
+  - Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
     },
     {
       name: "VHM Tex Ind Pvt. Ltd. Website | HTML, CSS, Javascript, Firebase, Hostinger",
       link: "https://vhmtex.com/",
       description: `
-  • Developed a new user interface from scratch to enhance visual appeal and professionalism.<br/>
-  • Improved responsiveness, navigation, and user experience across all devices and screen sizes.<br/>
-  • Successfully attracted more business inquiries through a modern, engaging online presence.`,
+  - Developed a new user interface from scratch to enhance visual appeal and professionalism.<br/>
+  - Improved responsiveness, navigation, and user experience across all devices and screen sizes.<br/>
+  - Successfully attracted more business inquiries through a modern, engaging online presence.`,
     },
   ],
   achievements: [
@@ -69,6 +68,94 @@ const personalInfo = {
 // --- Initialize Firebase ---
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// --- Glitch Background Component (Corrected) ---
+const GlitchBackground = () => {
+  const canvasRef = useRef(null);
+  const animationRef = useRef(null);
+  const letters = useRef([]);
+  const grid = useRef({ columns: 0, rows: 0 });
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}()[]<>!#%&*+-=/;:,_              ";
+    const colors = ["#61afef", "#98c379", "#abb2bf", "#e06c75", "#e5c07b"];
+
+    const initialize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      grid.current.columns = Math.floor(canvas.width / 16);
+      // THIS IS THE FIX: Ensure we always have enough rows to fill the screen
+      grid.current.rows = Math.ceil(canvas.height / 16) + 1;
+
+      letters.current = [];
+      for (let i = 0; i < grid.current.columns * grid.current.rows; i++) {
+        letters.current.push({
+          char: chars[Math.floor(Math.random() * chars.length)],
+          color: colors[Math.floor(Math.random() * colors.length)],
+        });
+      }
+    };
+
+    const draw = () => {
+      ctx.fillStyle = "rgba(40, 44, 52, 1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // CHANGE #1: Make the font bold
+      ctx.font = "bold 18px monospace";
+
+      // CHANGE #2: Add shadow properties
+      ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+      ctx.shadowBlur = 5;
+      ctx.shadowOffsetX = 2;
+      ctx.shadowOffsetY = 2;
+
+      for (let i = 0; i < letters.current.length; i++) {
+        const letter = letters.current[i];
+        const x = (i % grid.current.columns) * 16;
+        const y = Math.floor(i / grid.current.columns) * 16;
+        ctx.fillStyle = letter.color;
+        ctx.fillText(letter.char, x, y);
+      }
+
+      // CHANGE #3: Reset shadow properties (good practice)
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+    };
+
+    const animate = () => {
+      const updateCount = Math.floor(letters.current.length * 0.01);
+      for (let i = 0; i < updateCount; i++) {
+        const index = Math.floor(Math.random() * letters.current.length);
+        letters.current[index].char =
+          chars[Math.floor(Math.random() * chars.length)];
+      }
+      draw();
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    initialize();
+    animate();
+
+    const handleResize = () => {
+      cancelAnimationFrame(animationRef.current);
+      initialize();
+      animate();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="glitch-background" />;
+};
 
 // --- Loader Component ---
 const Loader = ({ onLoaded }) => {
@@ -107,12 +194,11 @@ const Terminal = () => {
   const inputRef = useRef(null);
   const welcomeMessageShown = useRef(false);
 
-  // This hook now only runs ONCE when the terminal first appears.
   useEffect(() => {
-    if (inputRef.current) {
+    if (!isTerminalLocked && inputRef.current) {
       inputRef.current.focus();
     }
-  }, []);
+  }, [isTerminalLocked]);
 
   useEffect(() => {
     terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -237,7 +323,6 @@ const Terminal = () => {
           `Phone:      ${personalInfo.phone}`,
           `LinkedIn:   <a href="${personalInfo.linkedinUrl}" target="_blank">${personalInfo.linkedinUrl}</a>`,
           `GitHub:     <a href="${personalInfo.githubUrl}" target="_blank">${personalInfo.githubUrl}</a>`,
-          `Instagram:  <a href="${personalInfo.insta}" target="_blank">${personalInfo.insta}</a>`,
         ];
         break;
       case "resume":
@@ -251,7 +336,12 @@ const Terminal = () => {
         addHistory("Enter your name:");
         return;
       case "clear":
-        setHistory([]);
+        setHistory([
+          "Welcome to Ronak's Portfolio!",
+          "Press F11 or Fn+F11 for better experience",
+          "Type 'help' to see a list of available commands.",
+          "",
+        ]);
         return;
       default:
         output = [
@@ -292,7 +382,6 @@ const Terminal = () => {
         setContactInfo({ name: "", message: "" });
         setTerminalLocked(false);
         setIsSubmitting(false);
-        // This is the fix: Safely focus after a tiny delay
         setTimeout(() => inputRef.current?.focus(), 0);
       }
     }
@@ -317,6 +406,7 @@ const Terminal = () => {
     if (!welcomeMessageShown.current) {
       addHistory([
         "Welcome to Ronak's Portfolio!",
+        "Press F11 or Fn + F11 for better experience",
         "Type 'help' to see a list of available commands.",
         "",
       ]);
@@ -386,6 +476,7 @@ function App() {
 
   return (
     <>
+      <GlitchBackground />
       {loading && <Loader onLoaded={() => setLoading(false)} />}
       <div className={`terminal-wrapper ${loading ? "hidden" : "visible"}`}>
         <Terminal />

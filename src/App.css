@@ -37,6 +37,8 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 .terminal-header {
@@ -45,13 +47,14 @@ body {
   display: flex;
   align-items: center;
   position: relative;
-  justify-content: center; /* Add this line */
+  justify-content: center;
 }
+
 .terminal-buttons {
   display: flex;
   gap: 8px;
-  position: absolute; /* Add this */
-  left: 12px; /* Add this */
+  position: absolute;
+  left: 12px;
 }
 
 .dot {
@@ -73,7 +76,6 @@ body {
 .terminal-title {
   color: var(--text-secondary);
   font-size: 14px;
-  /* Remove the position, left, and transform properties */
 }
 
 .terminal-body {
@@ -181,8 +183,8 @@ body {
 }
 
 .logo {
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   animation: pulse 1.5s infinite ease-in-out;
   z-index: 102;
   transition: opacity 0.5s ease;
@@ -239,9 +241,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
-.terminal-wrapper.hidden .terminal-container {
+.terminal-wrapper.hidden {
   opacity: 0;
 }
 
@@ -260,9 +264,19 @@ body {
   }
 }
 
-/* --- NEW: Responsive Styles --- */
+/* --- NEW: Glitch Background Styles --- */
+.glitch-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.1;
+}
 
-/* For tablets and smaller devices */
+/* --- Responsive Styles --- */
+
 @media (max-width: 768px) {
   .terminal-container {
     width: 95%;
@@ -279,13 +293,10 @@ body {
   }
 }
 
-/* For mobile phones */
 @media (max-width: 480px) {
   .terminal-container {
-    width: 90%;
-    height: 100vh;
-    border-radius: 10px;
-    box-shadow: none;
+    width: 95%;
+    height: 95vh;
   }
 
   .terminal-body {
@@ -295,14 +306,14 @@ body {
 
   .about-container {
     display: flex;
-    flex-direction: column; /* Stack image and text vertically */
+    flex-direction: column;
     align-items: center;
   }
 
   .profile-photo {
     float: none;
     margin-right: 0;
-    margin-bottom: 15px; /* Add space below the image */
+    margin-bottom: 15px;
     width: 100px;
     height: 100px;
   }
