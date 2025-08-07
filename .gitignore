@@ -21,3 +21,11 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+REACT_APP_API_KEY="AIzaSyCI0GYZ6le92EPIkV4pdT9v22_6z6yiby8"
+REACT_APP_AUTH_DOMAIN="ronak-portfolio-contact.firebaseapp.com"
+REACT_APP_PROJECT_ID="ronak-portfolio-contact"
+REACT_APP_STORAGE_BUCKET="ronak-portfolio-contact.firebasestorage.app"
+REACT_APP_MESSAGING_SENDER_ID="634368503848"
+REACT_APP_APP_ID="1:634368503848:web:bb6b17c4bbedfa18c7851d"
+REACT_APP_MEASUREMENT_ID="G-CWG2VQ186M"

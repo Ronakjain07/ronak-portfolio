@@ -1,38 +1,235 @@
-.App {
-  text-align: center;
+:root {
+  --background: #282c34;
+  --header: #21252b;
+  --text-primary: #abb2bf;
+  --text-secondary: #5c6370;
+  --prompt: #61afef;
+  --green: #98c379;
+  --red: #e06c75;
+  --yellow: #e5c07b;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: "Fira Code", "Menlo", "Monaco", "Courier New", monospace;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   min-height: 100vh;
+}
+
+.terminal-container {
+  width: 90%;
+  max-width: 1000px;
+  height: 80vh;
+  max-height: 600px;
+  background-color: var(--header);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.terminal-header {
+  background-color: #3a3f4c;
+  padding: 8px 12px;
+  display: flex;
   align-items: center;
+  position: relative;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.red {
+  background-color: #ff5f56;
+}
+.yellow {
+  background-color: #ffbd2e;
+}
+.green {
+  background-color: #27c93f;
+}
+
+.terminal-title {
+  color: var(--text-secondary);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+}
+
+.terminal-body {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.terminal-body p {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.terminal-body a {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.output-header {
+  color: var(--yellow);
+}
+
+.prompt-history {
+  color: var(--prompt);
+}
+
+.error-message {
+  color: var(--red);
+}
+
+.terminal-prompt {
+  display: flex;
+  align-items: center;
+}
+
+.terminal-prompt form {
+  flex-grow: 1;
+}
+
+.terminal-prompt span {
+  color: var(--prompt);
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.terminal-input {
+  background: none;
+  border: none;
+  color: var(--prompt);
+  font-family: inherit;
+  font-size: inherit;
+  flex-grow: 1;
+  outline: none;
+  width: 100%;
+  padding: 0;
+}
+
+.profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  margin-right: 20px;
+  object-fit: cover;
+  float: left;
+}
+
+.about-container {
+  display: block;
+  margin-top: 10px;
+}
+
+.about-text {
+  overflow: hidden;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background: var(--header);
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background-color: var(--text-secondary);
+  border-radius: 4px;
+}
+
+/* --- Loader and Animation Styles --- */
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  background-color: var(--background);
+  z-index: 100;
 }
 
-.App-link {
-  color: #61dafb;
+/* UPDATED: Styles for the logo image */
+.logo {
+  width: 250px; /* Adjust size as needed */
+  height: 250px; /* Adjust size as needed */
+  animation: pulse 1.5s infinite ease-in-out;
+  z-index: 102;
+  transition: opacity 0.5s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
   }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.split-pane {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-color: var(--background);
+  z-index: 101;
+  transition: transform 1s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
+.loader-container.exit .logo {
+  opacity: 0;
+}
+
+.loader-container.exit .left {
+  transform: translateX(-100%);
+}
+
+.loader-container.exit .right {
+  transform: translateX(100%);
 }
