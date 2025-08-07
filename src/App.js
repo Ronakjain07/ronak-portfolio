@@ -22,6 +22,7 @@ const personalInfo = {
     "https://drive.google.com/file/d/1Zo9k3T3tXdwudKpH_VhQyiGkkIjYkH0N/view?usp=sharing",
   githubUrl: "https://github.com/Ronakjain07",
   linkedinUrl: "https://www.linkedin.com/in/ronak-jain-rj07/",
+  insta: "https://www.instagram.com/ronak_jainnn",
   email: "ronaktjain07@gmail.com",
   phone: "+91 9328087529",
   projects: [
@@ -76,8 +77,8 @@ const Loader = ({ onLoaded }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setExit(true);
-      setTimeout(onLoaded, 1000); // Wait for split animation to finish
-    }, 3000); // Show loader for 3 seconds
+      setTimeout(onLoaded, 1000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [onLoaded]);
@@ -86,15 +87,13 @@ const Loader = ({ onLoaded }) => {
     <div className={`loader-container ${exit ? "exit" : ""}`}>
       <div className="split-pane left"></div>
       <div className="split-pane right"></div>
-      {/* UPDATED: Changed from text to an image tag */}
       <img src="/logo.png" alt="Ronak Jain Logo" className="logo" />
     </div>
   );
 };
 
-// --- Main App Component ---
-function App() {
-  const [loading, setLoading] = useState(true);
+// --- Terminal Component ---
+const Terminal = () => {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState([]);
   const [commandHistory, setCommandHistory] = useState([]);
@@ -108,11 +107,12 @@ function App() {
   const inputRef = useRef(null);
   const welcomeMessageShown = useRef(false);
 
+  // This hook now only runs ONCE when the terminal first appears.
   useEffect(() => {
-    if (!loading && !isTerminalLocked) {
+    if (inputRef.current) {
       inputRef.current.focus();
     }
-  }, [loading, isTerminalLocked]);
+  }, []);
 
   useEffect(() => {
     terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -237,6 +237,7 @@ function App() {
           `Phone:      ${personalInfo.phone}`,
           `LinkedIn:   <a href="${personalInfo.linkedinUrl}" target="_blank">${personalInfo.linkedinUrl}</a>`,
           `GitHub:     <a href="${personalInfo.githubUrl}" target="_blank">${personalInfo.githubUrl}</a>`,
+          `Instagram:  <a href="${personalInfo.insta}" target="_blank">${personalInfo.insta}</a>`,
         ];
         break;
       case "resume":
@@ -291,6 +292,8 @@ function App() {
         setContactInfo({ name: "", message: "" });
         setTerminalLocked(false);
         setIsSubmitting(false);
+        // This is the fix: Safely focus after a tiny delay
+        setTimeout(() => inputRef.current?.focus(), 0);
       }
     }
   };
@@ -311,7 +314,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (!loading && !welcomeMessageShown.current) {
+    if (!welcomeMessageShown.current) {
       addHistory([
         "Welcome to Ronak's Portfolio!",
         "Type 'help' to see a list of available commands.",
@@ -319,11 +322,7 @@ function App() {
       ]);
       welcomeMessageShown.current = true;
     }
-  }, [loading]);
-
-  if (loading) {
-    return <Loader onLoaded={() => setLoading(false)} />;
-  }
+  }, []);
 
   return (
     <div
@@ -378,6 +377,20 @@ function App() {
         <div ref={terminalEndRef} />
       </div>
     </div>
+  );
+};
+
+// --- Main App component to handle loading logic ---
+function App() {
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <>
+      {loading && <Loader onLoaded={() => setLoading(false)} />}
+      <div className={`terminal-wrapper ${loading ? "hidden" : "visible"}`}>
+        <Terminal />
+      </div>
+    </>
   );
 }
 

@@ -45,11 +45,13 @@ body {
   display: flex;
   align-items: center;
   position: relative;
+  justify-content: center; /* Add this line */
 }
-
 .terminal-buttons {
   display: flex;
   gap: 8px;
+  position: absolute; /* Add this */
+  left: 12px; /* Add this */
 }
 
 .dot {
@@ -70,10 +72,8 @@ body {
 
 .terminal-title {
   color: var(--text-secondary);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   font-size: 14px;
+  /* Remove the position, left, and transform properties */
 }
 
 .terminal-body {
@@ -180,10 +180,9 @@ body {
   z-index: 100;
 }
 
-/* UPDATED: Styles for the logo image */
 .logo {
-  width: 250px; /* Adjust size as needed */
-  height: 250px; /* Adjust size as needed */
+  width: 250px;
+  height: 250px;
   animation: pulse 1.5s infinite ease-in-out;
   z-index: 102;
   transition: opacity 0.5s ease;
@@ -232,4 +231,88 @@ body {
 
 .loader-container.exit .right {
   transform: translateX(100%);
+}
+
+.terminal-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.terminal-wrapper.hidden .terminal-container {
+  opacity: 0;
+}
+
+.terminal-wrapper.visible .terminal-container {
+  animation: zoomIn 0.5s 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* --- NEW: Responsive Styles --- */
+
+/* For tablets and smaller devices */
+@media (max-width: 768px) {
+  .terminal-container {
+    width: 95%;
+    height: 90vh;
+  }
+
+  .terminal-body {
+    font-size: 13px;
+  }
+
+  .profile-photo {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+  .terminal-container {
+    width: 90%;
+    height: 100vh;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  .terminal-body {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .about-container {
+    display: flex;
+    flex-direction: column; /* Stack image and text vertically */
+    align-items: center;
+  }
+
+  .profile-photo {
+    float: none;
+    margin-right: 0;
+    margin-bottom: 15px; /* Add space below the image */
+    width: 100px;
+    height: 100px;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+
+  .logo {
+    width: 80px;
+    height: 80px;
+  }
 }
