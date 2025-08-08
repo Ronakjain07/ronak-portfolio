@@ -25,6 +25,7 @@ const personalInfo = {
   resumeUrl:
     "https://drive.google.com/file/d/1Zo9k3T3tXdwudKpH_VhQyiGkkIjYkH0N/view?usp=sharing",
   githubUrl: "https://github.com/Ronakjain07",
+  insta: "https://www.instagram.com/ronak_jainnn",
   linkedinUrl: "https://www.linkedin.com/in/ronak-jain-rj07/",
   email: "ronaktjain07@gmail.com",
   phone: "+91 9328087529",
@@ -85,7 +86,7 @@ const GlitchBackground = () => {
     const ctx = canvas.getContext("2d");
     const chars =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}()[]<>!#%&*+-=/;:,_              ";
-    const colors = ["#61afef", "#98c379", "#abb2bf", "#e06c75", "#e5c07b"];
+    const colors = ["#006fcaff", "#98c379", "#abb2bf", "#e06c75", "#a0b501ff"];
 
     const initialize = () => {
       canvas.width = window.innerWidth;
@@ -323,8 +324,9 @@ const Terminal = () => {
       case "contact":
         output = [
           `<span class="output-header">--- Contact Me ---</span>`,
-          `Email:      <a href="mailto:${personalInfo.email}">${personalInfo.email}</a>`,
           `Phone:      ${personalInfo.phone}`,
+          `Email:      <a href="mailto:${personalInfo.email}">${personalInfo.email}</a>`,
+          `Instagram:  <a href="${personalInfo.insta}" target="_blank">${personalInfo.insta}</a>`,
           `LinkedIn:   <a href="${personalInfo.linkedinUrl}" target="_blank">${personalInfo.linkedinUrl}</a>`,
           `GitHub:     <a href="${personalInfo.githubUrl}" target="_blank">${personalInfo.githubUrl}</a>`,
         ];
