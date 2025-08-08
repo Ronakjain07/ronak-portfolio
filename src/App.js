@@ -22,50 +22,53 @@ if (GA_MEASUREMENT_ID) {
 }
 // --- Content for the commands ---
 const personalInfo = {
-  resumeUrl:
-    "https://drive.google.com/file/d/1Zo9k3T3tXdwudKpH_VhQyiGkkIjYkH0N/view?usp=sharing",
+  resumeUrl: "www.google.com",
   githubUrl: "https://github.com/Ronakjain07",
   insta: "https://www.instagram.com/ronak_jainnn",
   linkedinUrl: "https://www.linkedin.com/in/ronak-jain-rj07/",
   email: "ronaktjain07@gmail.com",
-  phone: "+91 9328087529",
   projects: [
+    {
+      name: "VHM Tex Ind Pvt. Ltd. Website | HTML, CSS, Javascript, Firebase, Hostinger",
+      link: "https://vhmtex.com/",
+      description: `
+  - Developed a new user interface from scratch to enhance visual appeal and professionalism.
+  - Improved responsiveness, navigation, and user experience across all devices and screen sizes.
+  - Successfully attracted more business inquiries through a modern, engaging online presence.`,
+    },
     {
       name: "JTM Inventory Manager | ReactJS, HTML, CSS, Vercel",
       link: "https://jtm-inventory-manager.vercel.app/",
       description: `
-  - Developed a responsive web app to manage cloth stock flow by quality, improving inventory accuracy by 40%.<br/>
-  - Designed clean, modular React components with dashboard views for real-time tracking.<br/>
+  - Developed a responsive web app to manage cloth stock flow by quality, improving inventory accuracy by 40%.
+  - Designed clean, modular React components with dashboard views for real-time tracking.
   - Enhanced usability for factory teams through intuitive UI/UX and mobile-friendly layouts.`,
     },
     {
       name: "Secure RFID Vehicle Access + Live Monitoring | Arduino, Node.js, C++, RFID Module",
       link: "",
       description: `
-  - Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.<br/>
-  - Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.<br/>
+  - Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.
+  - Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.
   - Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
-    },
-    {
-      name: "VHM Tex Ind Pvt. Ltd. Website | HTML, CSS, Javascript, Firebase, Hostinger",
-      link: "https://vhmtex.com/",
-      description: `
-  - Developed a new user interface from scratch to enhance visual appeal and professionalism.<br/>
-  - Improved responsiveness, navigation, and user experience across all devices and screen sizes.<br/>
-  - Successfully attracted more business inquiries through a modern, engaging online presence.`,
     },
   ],
   achievements: [
     {
       name: "Winner at Hack-off -V4.0 Hackathon | IET",
-      link: "https://drive.google.com/drive/u/0/my-drive",
+      link: "https://drive.google.com/file/d/170TqQWe_2Xrl_O64CZ5svf8u2Xvvhexo/view?usp=sharing",
       description:
-        "Won Hack-off V4.0 by IET for an innovative solution, highlighting problem-solving, teamwork, and presentation skills.",
+        "Won for an innovative solution, highlighting problem-solving and teamwork.",
     },
     {
       name: "Best UI/UX Award at Women Techies Hackathon | GDSC VIT",
       description:
-        "Won Best UI/UX for designing an intuitive, user-friendly, and impactful interface.",
+        "Won for designing an intuitive, user-friendly, and impactful interface.",
+    },
+    {
+      name: "Rajya Puraskar – Bharat Scouts & Guides",
+      description:
+        "Received the prestigious Rajya Puraskar from the Governor of Gujarat for excellence in scouting.",
     },
   ],
 };
@@ -275,12 +278,15 @@ const Terminal = () => {
           `<span class="output-header">--- Experience ---</span>`,
           "",
           "JTM Textile Industries LLP | Software Development Engineer Intern (June 2024 - July 2024)",
-          "  - Built a scalable inventory management system using React.js, reducing stock tracking time by 40%.",
-          "  - Developed a modular, reusable front-end architecture.",
+          "  - Built a scalable inventory management system using React.js, enhancing UI/UX and reducing stock tracking time by 40%.",
+          "  - Developed a modular, reusable front-end architecture for long-term performance and maintainability.",
+          "  - Improved internal workflows through clean component-based design and responsive UI implementation.",
+          "  - Revamped digital assets and social handles, increasing brand engagement and contributing to 3+ new B2B client acquisitions.",
           "",
           "Krenko Technologies Pvt. Ltd. | Full Stack Intern (May 2023 - June 2023)",
-          "  - Developed responsive website layouts and interactive features.",
-          "  - Converted UI/UX designs from Figma/Canva into functional web pages.",
+          "  - Developed responsive website layouts and interactive features, ensuring seamless navigation and engaging user experience.",
+          "  - Converted UI/UX designs from Figma/Canva into functional web pages, fixed frontend bugs, and enhanced cross-device performance.",
+          "  - Optimized web pages for speed and scalability, maintained clean code, conducted testing, and supported feature deployments.",
         ];
         break;
       case "projects":
@@ -315,16 +321,16 @@ const Terminal = () => {
           `<span class="output-header">--- Skills ---</span>`,
           "",
           "Languages:      Java, Javascript, C, C++, Python",
-          "Web Dev:        ReactJS, NodeJS, HTML, CSS, TailwindCSS",
-          "Databases:      SQL, Firebase, Supabase",
+          "Web Dev:        ReactJS, NodeJS, HTML, CSS, Bootstrap, TailwindCSS, Figma, Canva",
+          "Databases:      SQL, Firebase, Supabase, SheetsDB",
           "Version Control:Git, GitHub, Vercel",
-          "Concepts:       SDLC, OOP, OS, Computer Networks",
+          "Concepts:       SDLC, OOP, Operating Systems, Computer Networks",
+          "Other Skills: Generative AI, Microsoft Tools, Business Analysis, Customer Acquisition",
         ];
         break;
       case "contact":
         output = [
           `<span class="output-header">--- Contact Me ---</span>`,
-          `Phone:      ${personalInfo.phone}`,
           `Email:      <a href="mailto:${personalInfo.email}">${personalInfo.email}</a>`,
           `Instagram:  <a href="${personalInfo.insta}" target="_blank">${personalInfo.insta}</a>`,
           `LinkedIn:   <a href="${personalInfo.linkedinUrl}" target="_blank">${personalInfo.linkedinUrl}</a>`,
