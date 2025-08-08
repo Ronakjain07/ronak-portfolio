@@ -4,7 +4,7 @@ import "./App.css";
 // --- Firebase Imports ---
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-
+import ReactGA from "react-ga4";
 // --- Personal Information & Firebase Config ---
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -15,7 +15,11 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
-
+// --- Initialize Google Analytics ---
+const GA_MEASUREMENT_ID = process.env.REACT_APP_GA_MEASUREMENT_ID;
+if (GA_MEASUREMENT_ID) {
+  ReactGA.initialize(GA_MEASUREMENT_ID);
+}
 // --- Content for the commands ---
 const personalInfo = {
   resumeUrl:
