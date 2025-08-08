@@ -368,14 +368,23 @@ const Terminal = () => {
 
       try {
         const finalContactInfo = { name: contactInfo.name, message: value };
+
+        // 1. Save to Firebase (as before)
         await addDoc(collection(db, "contacts"), {
           name: finalContactInfo.name,
           message: finalContactInfo.message,
           timestamp: new Date(),
         });
+
+        // 2. NEW: Send to Telegram via our backend function
+        await fetch("/.netlify/functions/sendMessage", {
+          method: "POST",
+          body: JSON.stringify(finalContactInfo),
+        });
+
         addHistory("Message sent successfully!");
       } catch (error) {
-        console.error("Error adding document: ", error);
+        console.error("Error submitting form: ", error);
         addHistory("Error: Could not send message. Please try again later.");
       } finally {
         setContactStep(0);
