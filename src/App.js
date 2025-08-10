@@ -22,7 +22,8 @@ if (GA_MEASUREMENT_ID) {
 }
 // --- Content for the commands ---
 const personalInfo = {
-  resumeUrl: "www.google.com",
+  resumeUrl:
+    "https://drive.google.com/file/d/1Zo9k3T3tXdwudKpH_VhQyiGkkIjYkH0N/view?usp=sharing",
   githubUrl: "https://github.com/Ronakjain07",
   insta: "https://www.instagram.com/ronak_jainnn",
   linkedinUrl: "https://www.linkedin.com/in/ronak-jain-rj07/",
@@ -37,7 +38,7 @@ const personalInfo = {
   - Successfully attracted more business inquiries through a modern, engaging online presence.`,
     },
     {
-      name: "JTM Inventory Manager | ReactJS, HTML, CSS, Vercel",
+      name: "JTM Inventory Manager",
       link: "https://jtm-inventory-manager.vercel.app/",
       description: `
   - Developed a responsive web app to manage cloth stock flow by quality, improving inventory accuracy by 40%.
@@ -45,7 +46,23 @@ const personalInfo = {
   - Enhanced usability for factory teams through intuitive UI/UX and mobile-friendly layouts.`,
     },
     {
-      name: "Secure RFID Vehicle Access + Live Monitoring | Arduino, Node.js, C++, RFID Module",
+      name: "Secure RFID Vehicle Access + Live Monitoring",
+      link: "",
+      description: `
+  - Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.
+  - Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.
+  - Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
+    },
+    {
+      name: "Simon-Says Game",
+      link: "",
+      description: `
+  - Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.
+  - Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.
+  - Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
+    },
+    {
+      name: "Hoodeye Web",
       link: "",
       description: `
   - Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.
@@ -277,13 +294,13 @@ const Terminal = () => {
         output = [
           `<span class="output-header">--- Experience ---</span>`,
           "",
-          "JTM Textile Industries LLP | Software Development Engineer Intern (June 2024 - July 2024)",
+          "VHM Tex Ind Pvt. Ltd. | Software Development Engineer Intern (June 2024 - July 2024)",
           "  - Built a scalable inventory management system using React.js, enhancing UI/UX and reducing stock tracking time by 40%.",
           "  - Developed a modular, reusable front-end architecture for long-term performance and maintainability.",
           "  - Improved internal workflows through clean component-based design and responsive UI implementation.",
           "  - Revamped digital assets and social handles, increasing brand engagement and contributing to 3+ new B2B client acquisitions.",
           "",
-          "Krenko Technologies Pvt. Ltd. | Full Stack Intern (May 2023 - June 2023)",
+          "Krenko Technologies Pvt. Ltd. | Full Stack Intern (May 2025 - June 2025)",
           "  - Developed responsive website layouts and interactive features, ensuring seamless navigation and engaging user experience.",
           "  - Converted UI/UX designs from Figma/Canva into functional web pages, fixed frontend bugs, and enhanced cross-device performance.",
           "  - Optimized web pages for speed and scalability, maintained clean code, conducted testing, and supported feature deployments.",
