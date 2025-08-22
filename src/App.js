@@ -366,7 +366,6 @@ const Terminal = () => {
           "Open this in a laptop for better experience",
           "Press F11 or Fn+F11 for better experience",
           "Type 'help' to see a list of available commands.",
-          "",
         ]);
         return;
       case "exit":
