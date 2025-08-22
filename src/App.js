@@ -333,12 +333,12 @@ const Terminal = () => {
         output = [
           `<span class="output-header">--- Skills ---</span>`,
           "",
-          "Languages:      Java, Javascript, C, C++, Python",
-          "Web Dev:        ReactJS, NodeJS, HTML, CSS, Bootstrap, TailwindCSS, Figma, Canva",
-          "Databases:      SQL, Firebase, Supabase, SheetsDB",
-          "Version Control:Git, GitHub, Vercel",
-          "Concepts:       SDLC, OOP, Operating Systems, Computer Networks",
-          "Other Skills: Generative AI, Microsoft Tools, Business Analysis, Customer Acquisition",
+          `<span><span class="skill-label">Languages:</span> Java, Javascript, C, C++, Python</span>`,
+          `<span><span class="skill-label">Web Dev:</span> ReactJS, NodeJS, HTML, CSS, Bootstrap, TailwindCSS, Figma, Canva</span>`,
+          `<span><span class="skill-label">Databases:</span> SQL, Firebase, Supabase, SheetsDB</span>`,
+          `<span><span class="skill-label">Version Control:</span> Git, GitHub, Vercel</span>`,
+          `<span><span class="skill-label">Concepts:</span> SDLC, OOP, Operating Systems, Computer Networks</span>`,
+          `<span><span class="skill-label">Other Skills:</span> Generative AI, Microsoft Tools, Business Analysis, Customer Acquisition</span>`,
         ];
         break;
       case "contact":

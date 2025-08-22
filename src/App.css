@@ -182,6 +182,10 @@ body {
   background-color: var(--background);
   z-index: 100;
 }
+.skill-label {
+  color: var(--green);
+  font-weight: bold;
+}
 
 .logo {
   width: 300px;
