@@ -5,6 +5,7 @@ import "./App.css";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import ReactGA from "react-ga4";
+
 // --- Personal Information & Firebase Config ---
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -15,11 +16,13 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
+
 // --- Initialize Google Analytics ---
 const GA_MEASUREMENT_ID = process.env.REACT_APP_GA_MEASUREMENT_ID;
 if (GA_MEASUREMENT_ID) {
   ReactGA.initialize(GA_MEASUREMENT_ID);
 }
+
 // --- Content for the commands ---
 const personalInfo = {
   resumeUrl:
@@ -33,41 +36,41 @@ const personalInfo = {
       name: "VHM Tex Ind Pvt. Ltd. Website | HTML, CSS, Javascript, Firebase, Hostinger",
       link: "https://vhmtex.com/",
       description: `
-  - Developed a new user interface from scratch to enhance visual appeal and professionalism.
-  - Improved responsiveness, navigation, and user experience across all devices and screen sizes.
-  - Successfully attracted more business inquiries through a modern, engaging online presence.`,
+  • Developed a new user interface from scratch to enhance visual appeal and professionalism.<br/>
+  • Improved responsiveness, navigation, and user experience across all devices and screen sizes.<br/>
+  • Successfully attracted more business inquiries through a modern, engaging online presence.`,
     },
     {
       name: "JTM Inventory Manager",
       link: "https://jtm-inventory-manager.vercel.app/",
       description: `
-  - Developed a responsive web app to manage cloth stock flow by quality, improving inventory accuracy by 40%.
-  - Designed clean, modular React components with dashboard views for real-time tracking.
-  - Enhanced usability for factory teams through intuitive UI/UX and mobile-friendly layouts.`,
+  • Developed a responsive web app to manage cloth stock flow by quality, improving inventory accuracy by 40%.<br/>
+  • Designed clean, modular React components with dashboard views for real-time tracking.<br/>
+  • Enhanced usability for factory teams through intuitive UI/UX and mobile-friendly layouts.`,
     },
     {
       name: "Secure RFID Vehicle Access + Live Monitoring",
       link: "",
       description: `
-  - Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.
-  - Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.
-  - Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
+  • Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.<br/>
+  • Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.<br/>
+  • Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
     },
     {
       name: "Simon-Says Game",
       link: "",
       description: `
-  - Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.
-  - Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.
-  - Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
+  • Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.<br/>
+  • Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.<br/>
+  • Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
     },
     {
       name: "Hoodeye Web",
       link: "",
       description: `
-  - Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.
-  - Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.
-  - Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
+  • Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.<br/>
+  • Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.<br/>
+  • Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
     },
   ],
   achievements: [
@@ -94,30 +97,25 @@ const personalInfo = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// --- Glitch Background Component (Corrected) ---
+// --- Glitch Background Component ---
 const GlitchBackground = () => {
   const canvasRef = useRef(null);
-  const animationRef = useRef(null);
-  const letters = useRef([]);
-  const grid = useRef({ columns: 0, rows: 0 });
-
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    const chars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}()[]<>!#%&*+-=/;:,_              ";
+    let animationFrameId;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}()[]<>!#%&*+-=/;:,_";
     const colors = ["#006fcaff", "#98c379", "#abb2bf", "#e06c75", "#a0b501ff"];
+    let columns, rows, letters;
 
     const initialize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      grid.current.columns = Math.floor(canvas.width / 16);
-      // THIS IS THE FIX: Ensure we always have enough rows to fill the screen
-      grid.current.rows = Math.ceil(canvas.height / 16) + 1;
-
-      letters.current = [];
-      for (let i = 0; i < grid.current.columns * grid.current.rows; i++) {
-        letters.current.push({
+      columns = Math.floor(canvas.width / 16);
+      rows = Math.ceil(canvas.height / 16) + 1;
+      letters = [];
+      for (let i = 0; i < rows * columns; i++) {
+        letters.push({
           char: chars[Math.floor(Math.random() * chars.length)],
           color: colors[Math.floor(Math.random() * colors.length)],
         });
@@ -127,54 +125,47 @@ const GlitchBackground = () => {
     const draw = () => {
       ctx.fillStyle = "rgba(40, 44, 52, 1)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // CHANGE #1: Make the font bold
       ctx.font = "bold 18px monospace";
-
-      // CHANGE #2: Add shadow properties
       ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
       ctx.shadowBlur = 5;
       ctx.shadowOffsetX = 2;
       ctx.shadowOffsetY = 2;
 
-      for (let i = 0; i < letters.current.length; i++) {
-        const letter = letters.current[i];
-        const x = (i % grid.current.columns) * 16;
-        const y = Math.floor(i / grid.current.columns) * 16;
+      for (let i = 0; i < letters.length; i++) {
+        const letter = letters[i];
+        const x = (i % columns) * 16;
+        const y = Math.floor(i / columns) * 16;
         ctx.fillStyle = letter.color;
         ctx.fillText(letter.char, x, y);
       }
 
-      // CHANGE #3: Reset shadow properties (good practice)
       ctx.shadowBlur = 0;
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
     };
 
     const animate = () => {
-      const updateCount = Math.floor(letters.current.length * 0.01);
+      const updateCount = Math.floor(letters.length * 0.01);
       for (let i = 0; i < updateCount; i++) {
-        const index = Math.floor(Math.random() * letters.current.length);
-        letters.current[index].char =
-          chars[Math.floor(Math.random() * chars.length)];
+        const index = Math.floor(Math.random() * letters.length);
+        letters[index].char = chars[Math.floor(Math.random() * chars.length)];
       }
       draw();
-      animationRef.current = requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
-    initialize();
-    animate();
-
     const handleResize = () => {
-      cancelAnimationFrame(animationRef.current);
+      cancelAnimationFrame(animationFrameId);
       initialize();
       animate();
     };
 
+    initialize();
+    animate();
     window.addEventListener("resize", handleResize);
 
     return () => {
-      cancelAnimationFrame(animationRef.current);
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -212,7 +203,11 @@ const Terminal = () => {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [isTerminalLocked, setTerminalLocked] = useState(false);
   const [contactStep, setContactStep] = useState(0);
-  const [contactInfo, setContactInfo] = useState({ name: "", message: "" });
+  const [contactInfo, setContactInfo] = useState({
+    name: "",
+    email: "",
+    message: "",
+  }); // UPDATED
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const terminalEndRef = useRef(null);
@@ -282,6 +277,7 @@ const Terminal = () => {
           `  get-in-touch   - Leave a message for me.`,
           `  resume         - Download my resume.`,
           `  clear          - Clear the terminal screen.`,
+          `  exit           - Reload the portfolio.`,
         ];
         break;
       case "about":
@@ -372,6 +368,9 @@ const Terminal = () => {
           "",
         ]);
         return;
+      case "exit":
+        window.location.reload();
+        return;
       default:
         output = [
           `<span class="error-message">Command not found: ${command}</span>`,
@@ -383,12 +382,23 @@ const Terminal = () => {
   };
 
   const handleContactInput = async (value) => {
+    // UPDATED: Added step 2 for email
     if (contactStep === 1) {
+      // User entered name
       setContactInfo({ ...contactInfo, name: value });
       addHistory(`> ${value}`);
-      addHistory(`Hello, ${value}! Please leave your message below.`);
+      addHistory(`Enter your email:`);
       setContactStep(2);
     } else if (contactStep === 2) {
+      // User entered email
+      setContactInfo({ ...contactInfo, email: value });
+      addHistory(`> ${value}`);
+      addHistory(
+        `Hello, ${contactInfo.name}! Please leave your message below.`
+      );
+      setContactStep(3);
+    } else if (contactStep === 3) {
+      // User entered message
       if (isSubmitting) return;
 
       setIsSubmitting(true);
@@ -396,16 +406,17 @@ const Terminal = () => {
       addHistory("Thank you for your message! Submitting...");
 
       try {
-        const finalContactInfo = { name: contactInfo.name, message: value };
+        const finalContactInfo = { ...contactInfo, message: value };
 
-        // 1. Save to Firebase (as before)
+        // 1. Save to Firebase
         await addDoc(collection(db, "contacts"), {
           name: finalContactInfo.name,
+          email: finalContactInfo.email, // UPDATED
           message: finalContactInfo.message,
           timestamp: new Date(),
         });
 
-        // 2. NEW: Send to Telegram via our backend function
+        // 2. Send to Telegram
         await fetch("/.netlify/functions/sendMessage", {
           method: "POST",
           body: JSON.stringify(finalContactInfo),
@@ -417,7 +428,7 @@ const Terminal = () => {
         addHistory("Error: Could not send message. Please try again later.");
       } finally {
         setContactStep(0);
-        setContactInfo({ name: "", message: "" });
+        setContactInfo({ name: "", email: "", message: "" }); // UPDATED
         setTerminalLocked(false);
         setIsSubmitting(false);
         setTimeout(() => inputRef.current?.focus(), 0);
@@ -488,6 +499,7 @@ const Terminal = () => {
         )}
         {isTerminalLocked && contactStep > 0 && !isSubmitting && (
           <div className="terminal-prompt">
+            {/* UPDATED: Prompt logic for new step */}
             <span>{contactStep === 1 ? "" : ">"}</span>
             <form onSubmit={onFormSubmit}>
               <input

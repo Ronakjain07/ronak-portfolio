@@ -10,14 +10,15 @@ exports.handler = async function (event, context) {
 
   // Parse the message from the request
   const data = JSON.parse(event.body);
-  const { name, message } = data;
+  const { name, email, message } = data; // UPDATED
 
-  if (!name || !message) {
-    return { statusCode: 400, body: "Name and message are required." };
+  if (!name || !email || !message) {
+    // UPDATED
+    return { statusCode: 400, body: "Name, email, and message are required." };
   }
 
   // Format the message text
-  const text = `New message from portfolio:\n\n*From:* ${name}\n*Message:* ${message}`;
+  const text = `New message from portfolio:\n\n*From:* ${name}\n*Email:* ${email}\n*Message:* ${message}`; // UPDATED
 
   // The URL to send the message to the Telegram API
   const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
