@@ -214,6 +214,34 @@ const Terminal = () => {
   const inputRef = useRef(null);
   const welcomeMessageShown = useRef(false);
 
+  // NEW: Functions for the header buttons
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
+  const handleClear = () => {
+    setHistory([
+      "Welcome to Ronak's Portfolio!",
+      "Open this in a laptop for better experience",
+      "Press green button for better experience",
+      "Type 'help' to see a list of available commands.",
+      "",
+    ]);
+  };
+
+  const handleFullscreen = () => {
+    const elem = document.documentElement;
+    if (!document.fullscreenElement) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  };
+
   useEffect(() => {
     if (!isTerminalLocked && inputRef.current) {
       inputRef.current.focus();
@@ -376,12 +404,7 @@ const Terminal = () => {
         addHistory("Enter your name:");
         return;
       case "clear":
-        setHistory([
-          "Welcome to Ronak's Portfolio!",
-          "Open this in a laptop for better experience.",
-          "Press F11 or Fn + F11 for better experience.",
-          "Type 'help' to see a list of available commands.",
-        ]);
+        handleClear();
         return;
       case "exit":
         addHistory("Bye! Thanks for visiting...");
@@ -492,7 +515,7 @@ const Terminal = () => {
       addHistory([
         "Welcome to Ronak's Portfolio!",
         "Open this in a laptop for better experience.",
-        "Press F11 or Fn + F11 for better experience",
+        "Press green button for better experience.",
         "Type 'help' to see a list of available commands.",
         "",
       ]);
@@ -507,9 +530,9 @@ const Terminal = () => {
     >
       <div className="terminal-header">
         <div className="terminal-buttons">
-          <span className="dot red"></span>
-          <span className="dot yellow"></span>
-          <span className="dot green"></span>
+          <span className="dot red" onClick={handleRefresh}></span>
+          <span className="dot yellow" onClick={handleClear}></span>
+          <span className="dot green" onClick={handleFullscreen}></span>
         </div>
         <div className="terminal-title">guest@ronak-portfolio</div>
       </div>
