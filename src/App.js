@@ -290,28 +290,43 @@ const Terminal = () => {
         output = [
           `<span class="output-header">--- Experience ---</span>`,
           "",
-          "VHM Tex Ind Pvt. Ltd. | Software Development Engineer Intern (June 2024 - July 2024)",
-          "  - Built a scalable inventory management system using React.js, enhancing UI/UX and reducing stock tracking time by 40%.",
-          "  - Developed a modular, reusable front-end architecture for long-term performance and maintainability.",
-          "  - Improved internal workflows through clean component-based design and responsive UI implementation.",
-          "  - Revamped digital assets and social handles, increasing brand engagement and contributing to 3+ new B2B client acquisitions.",
+          `<span class="experience-title">Krenko Technologies Pvt. Ltd. | Full Stack Intern (May 2025 - June 2025)</span>`,
+          `<p class="experience-item">• Developed responsive website layouts and interactive features, ensuring seamless navigation and engaging user experience.</p>`,
+          `<p class="experience-item">• Converted UI/UX designs from Figma/Canva into functional web pages, fixed frontend bugs, and enhanced cross-device performance.</p>`,
+          `<p class="experience-item">• Optimized web pages for speed and scalability, maintained clean code, conducted testing, and supported feature deployments.</p>`,
+          `<span class="experience-title">VHM Tex Ind Pvt. Ltd. | Software Development Engineer Intern (June 2024 - July 2024)</span>`,
+          `<p class="experience-item">• Built a scalable inventory management system using React.js, enhancing UI/UX and reducing stock tracking time by 40%.</p>`,
+          `<p class="experience-item">• Developed a modular, reusable front-end architecture for long-term performance and maintainability.</p>`,
+          `<p class="experience-item">• Improved internal workflows through clean component-based design and responsive UI implementation.</p>`,
+          `<p class="experience-item">• Revamped digital assets and social handles, increasing brand engagement and contributing to 3+ new B2B client acquisitions.</p>`,
           "",
-          "Krenko Technologies Pvt. Ltd. | Full Stack Intern (May 2025 - June 2025)",
-          "  - Developed responsive website layouts and interactive features, ensuring seamless navigation and engaging user experience.",
-          "  - Converted UI/UX designs from Figma/Canva into functional web pages, fixed frontend bugs, and enhanced cross-device performance.",
-          "  - Optimized web pages for speed and scalability, maintained clean code, conducted testing, and supported feature deployments.",
         ];
         break;
       case "projects":
         output = [`<span class="output-header">--- Projects ---</span>`, ""];
         personalInfo.projects.forEach((p) => {
-          output.push(`> ${p.name}`);
-          if (p.link)
+          // Check if a link exists
+          if (p.link) {
+            // If yes, wrap the entire title in a link
             output.push(
-              `  Link: <a href="${p.link}" target="_blank">${p.link}</a>`
+              `<span class="experience-title">> <a href="${p.link}" target="_blank">${p.name}</a></span>`
             );
-          output.push(`  Description: ${p.description}`);
-          output.push("");
+          } else {
+            // If no, just display the title
+            output.push(`<span class="experience-title">> ${p.name}</span>`);
+          }
+
+          // Split the description into individual, correctly styled bullet points
+          const bulletPoints = p.description
+            .split("<br/>")
+            .map((line) => line.trim())
+            .filter((line) => line.length > 0);
+
+          bulletPoints.forEach((point) => {
+            output.push(`<p class="experience-item">${point}</p>`);
+          });
+
+          output.push(""); // Add a space after each project
         });
         break;
       case "achievements":
@@ -369,7 +384,28 @@ const Terminal = () => {
         ]);
         return;
       case "exit":
-        window.location.reload();
+        addHistory("Bye! Thanks for visiting...");
+        setTimeout(() => {
+          document.body.innerHTML = `
+            <div style="
+              display: flex;
+              flex-direction: column; /* Stack items vertically */
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              width: 100vw;
+              background-color: #282c34;
+              color: #abb2bf;
+              font-family: 'Fira Code', 'Menlo', 'Monaco', 'Courier New', monospace;
+              font-size: 1.5rem;
+              margin: 0;
+              text-align: center;
+            ">
+              <p>Thanks for visiting...</p>
+              <p style="font-size: 1rem; color: #788399ff;margin-top: -1rem">Made with ❤️ by <b>Ronak Tilokchand Jain</b></p>              
+            </div>
+          `;
+        }, 2000); // Wait 2 seconds
         return;
       default:
         output = [

@@ -167,6 +167,15 @@ body {
   background-color: var(--text-secondary);
   border-radius: 4px;
 }
+.experience-title {
+  color: var(--green);
+  font-weight: bold;
+}
+.experience-item {
+  padding-left: 2em;
+  text-indent: -1.5em;
+  margin-left: 1em;
+}
 
 /* --- Loader and Animation Styles --- */
 
