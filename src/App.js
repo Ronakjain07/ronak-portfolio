@@ -58,37 +58,46 @@ const personalInfo = {
     },
     {
       name: "Simon-Says Game",
-      link: "",
+      link: "https://ronakjain07.github.io/Simon-says/",
       description: `
-  • Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.<br/>
-  • Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.<br/>
-  • Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
+  • Gameplay – A memory-based reflex game where players repeat sequences of colored buttons shown by Simon.<br/>
+  • Progression – Each round adds a new step to the sequence, increasing difficulty as levels advance.<br/>
+  • Objective – Test and improve memory, focus, and reaction speed by scoring as high as possible before making a mistake.`,
     },
     {
       name: "Hoodeye Web",
       link: "",
       description: `
-  • Developed a secure RFID-based car access system using Arduino for keyless vehicle entry.<br/>
-  • Created a real-time web interface to monitor door status remotely, enhancing visibility and safety.<br/>
-  • Integrated hardware with web tech, applying full-stack IoT and embedded systems problem-solving skills.`,
+  • Real-Time Detection – Uses advanced technology to instantly identify your location.<br/>
+  • Safety Insights – Provides immediate security information about neighborhoods, both familiar and new.<br/>
+  • On-the-Go Awareness – Keeps you informed about safety whether you’re at home or traveling.`,
+    },
+    {
+      name: "More to be added soon...",
+      link: "",
+      description: "• Stay Tuned😉",
     },
   ],
   achievements: [
     {
-      name: "Winner at Hack-off -V4.0 Hackathon | IET",
+      name: "Winner at Hack-off -V4.0 Hackathon | IET VIT Vellore",
       link: "https://drive.google.com/file/d/170TqQWe_2Xrl_O64CZ5svf8u2Xvvhexo/view?usp=sharing",
       description:
-        "Won for an innovative solution, highlighting problem-solving and teamwork.",
+        "Won Hack-off V4.0 by IET for an innovative solution, highlighting problem-solving, teamwork, and presentation skills.",
     },
     {
-      name: "Best UI/UX Award at Women Techies Hackathon | GDSC VIT",
+      name: "Best UI/UX Award at Women Techies Hackathon | GDSC VIT Vellore",
       description:
-        "Won for designing an intuitive, user-friendly, and impactful interface.",
+        " Won Best UI/UX at WomenTechies Hackathon (GDSC VIT) for designing an intuitive, user-friendly, and impactful interface.",
     },
     {
-      name: "Rajya Puraskar – Bharat Scouts & Guides",
+      name: "Rajya Puraskar – Bharat Scouts & Guides | Vedant International School",
       description:
-        "Received the prestigious Rajya Puraskar from the Governor of Gujarat for excellence in scouting.",
+        "Received the prestigious Rajya Puraskar from the Honorable Governor of Gujarat for excellence in scouting, community service, and leadership. Successfully completed all state-level scouting requirements, contributing to social initiatives and national service awareness programs.",
+    },
+    {
+      name: "More to be added soon...",
+      description: "• Stay Tuned😉",
     },
   ],
 };
@@ -296,21 +305,23 @@ const Terminal = () => {
       case "help":
         output = [
           `<span class="output-header">Available commands:</span>`,
-          `  about          - Who is Ronak?`,
-          `  experience     - View my professional experience.`,
-          `  projects       - Check out my work.`,
-          `  skills         - See my list of technical skills.`,
-          `  achievements   - View my awards and achievements.`,
-          `  contact        - Display my contact information.`,
-          `  get-in-touch   - Leave a message for me.`,
-          `  resume         - Download my resume.`,
-          `  clear          - Clear the terminal screen.`,
-          `  exit           - Reload the portfolio.`,
+          `  <span class="help-command">about</span>          - Who is Ronak?`,
+          `  <span class="help-command">experience</span>     - View my professional experience.`,
+          `  <span class="help-command">projects</span>       - Check out my work.`,
+          `  <span class="help-command">education</span>      - View my educational background.'.`,
+          `  <span class="help-command">skills</span>         - See my list of technical skills.`,
+          `  <span class="help-command">achievements</span>   - View my awards and achievements.`,
+          `  <span class="help-command">contact</span>        - Display my contact information.`,
+          `  <span class="help-command">get-in-touch</span>   - Leave a message for me.`,
+          `  <span class="help-command">resume</span>         - Download my resume.`,
+          `  <span class="help-command">clear</span>          - Clear the terminal screen.`,
+          `  <span class="help-command">exit</span>           - Close the terminal session.`,
+          `  <span class="help-command">game</span>           - Play a game of 'Guess the Number'.`,
         ];
         break;
       case "about":
         output = [
-          "Hello! I'm Ronak Jain.",
+          `<span class="help-command">Hello I'm Ronak Jain.</span>`,
           `<div class="about-container"><img src="/ronak.png" alt="A photo of Ronak Jain" class="profile-photo" /><div class="about-text"> - Web Developer with a strong foundation in web technologies and expertise in modern frameworks. With a solid academic background in Computer Science, I have developed a deep understanding of software development principles, allowing me to approach projects with both technical precision and creative problem-solving.</br> - Fueled by an entrepreneurial spirit, I’m passionate about identifying meaningful problems and transforming them into scalable, impactful solutions. I thrive on turning complex concepts into real-world applications—blending strong technical skills with a sharp, results-driven mindset.</br> - Always eager to collaborate and innovate, I’d love to connect with professionals who are equally excited about technology, startups, and building solutions that truly make a difference.</div></div>`,
         ];
         break;
@@ -322,7 +333,7 @@ const Terminal = () => {
           `<p class="experience-item">• Developed responsive website layouts and interactive features, ensuring seamless navigation and engaging user experience.</p>`,
           `<p class="experience-item">• Converted UI/UX designs from Figma/Canva into functional web pages, fixed frontend bugs, and enhanced cross-device performance.</p>`,
           `<p class="experience-item">• Optimized web pages for speed and scalability, maintained clean code, conducted testing, and supported feature deployments.</p>`,
-          `<span class="experience-title">VHM Tex Ind Pvt. Ltd. | Software Development Engineer Intern (June 2024 - July 2024)</span>`,
+          `<span class="experience-title">JTM Textile Industries LLP | Software Development Engineer Intern (June 2024 - July 2024)</span>`,
           `<p class="experience-item">• Built a scalable inventory management system using React.js, enhancing UI/UX and reducing stock tracking time by 40%.</p>`,
           `<p class="experience-item">• Developed a modular, reusable front-end architecture for long-term performance and maintainability.</p>`,
           `<p class="experience-item">• Improved internal workflows through clean component-based design and responsive UI implementation.</p>`,
@@ -330,21 +341,28 @@ const Terminal = () => {
           "",
         ];
         break;
+      case "education":
+        output = [
+          `<span class="output-header">--- Education ---</span>`,
+          "",
+          `<span class="education-item"><b>> Vellore Institute of Technology, Vellore (2022 - Present)</b> </span>`,
+          `Bachelor of Technology in Computer Science (Blockchain Technology) | CGPA: 8.7/10`,
+          "",
+          `<span class="education-item"><b>> Vedant International School, Ahmedabad | (2020 - 2022)</b> </span>`,
+          `Higher Secondary Education | Class 12th: 88% | Class 10th: 89%`,
+        ];
+        break; // Add this line
       case "projects":
         output = [`<span class="output-header">--- Projects ---</span>`, ""];
         personalInfo.projects.forEach((p) => {
-          // Check if a link exists
+          // Construct the title with an optional [Link] at the end
+          let title = p.name;
           if (p.link) {
-            // If yes, wrap the entire title in a link
-            output.push(
-              `<span class="experience-title">> <a href="${p.link}" target="_blank">${p.name}</a></span>`
-            );
-          } else {
-            // If no, just display the title
-            output.push(`<span class="experience-title">> ${p.name}</span>`);
+            title += ` <a href="${p.link}" target="_blank">[Link]</a>`;
           }
+          output.push(`<span class="experience-title">> ${title}</span>`);
 
-          // Split the description into individual, correctly styled bullet points
+          // Split and format the description bullet points
           const bulletPoints = p.description
             .split("<br/>")
             .map((line) => line.trim())
@@ -363,13 +381,16 @@ const Terminal = () => {
           "",
         ];
         personalInfo.achievements.forEach((a) => {
-          output.push(`> ${a.name}`);
-          if (a.link)
-            output.push(
-              `  Link: <a href="${a.link}" target="_blank">${a.link}</a>`
-            );
-          output.push(`  Description: ${a.description}`);
-          output.push("");
+          // Construct the title with the [Link] if it exists
+          let title = a.name;
+          if (a.link) {
+            title += ` <a href="${a.link}" target="_blank">[Link]</a>`;
+          }
+          output.push(`<span class="experience-title">> ${title}</span>`);
+
+          // Add the description on the next line
+          output.push(`${a.description}`);
+          output.push(""); // Add a space after each achievement
         });
         break;
       case "skills":
@@ -430,6 +451,10 @@ const Terminal = () => {
           `;
         }, 2000); // Wait 2 seconds
         return;
+      case "email":
+        addHistory(`Opening default email client...`);
+        window.location.href = `mailto:${personalInfo.email}`;
+        break;
       default:
         output = [
           `<span class="error-message">Command not found: ${command}</span>`,

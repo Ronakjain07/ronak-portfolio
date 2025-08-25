@@ -260,7 +260,13 @@ body {
   position: relative;
   z-index: 2;
 }
-
+.help-command {
+  color: var(--green);
+  font-weight: bold;
+}
+.education-item {
+  color: var(--green);
+}
 .terminal-wrapper.hidden {
   opacity: 0;
 }
@@ -288,7 +294,7 @@ body {
   width: 102%;
   height: 100%;
   z-index: 0;
-  opacity: 0.3;
+  opacity: 0.16;
 }
 
 /* --- Responsive Styles --- */
