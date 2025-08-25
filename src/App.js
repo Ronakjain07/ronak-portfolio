@@ -92,12 +92,13 @@ const personalInfo = {
     },
     {
       name: "Rajya Puraskar – Bharat Scouts & Guides | Vedant International School",
+      link: "https://drive.google.com/file/d/1G6tpJsqKv0bhfaJ-OPbPJVNMf_rveHiD/view?usp=sharing",
       description:
         "Received the prestigious Rajya Puraskar from the Honorable Governor of Gujarat for excellence in scouting, community service, and leadership. Successfully completed all state-level scouting requirements, contributing to social initiatives and national service awareness programs.",
     },
     {
       name: "More to be added soon...",
-      description: "• Stay Tuned😉",
+      description: "Stay Tuned😉",
     },
   ],
 };
@@ -216,14 +217,13 @@ const Terminal = () => {
     name: "",
     email: "",
     message: "",
-  }); // UPDATED
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const terminalEndRef = useRef(null);
   const inputRef = useRef(null);
   const welcomeMessageShown = useRef(false);
 
-  // NEW: Functions for the header buttons
   const handleRefresh = () => {
     window.location.reload();
   };
@@ -351,18 +351,16 @@ const Terminal = () => {
           `<span class="education-item"><b>> Vedant International School, Ahmedabad | (2020 - 2022)</b> </span>`,
           `Higher Secondary Education | Class 12th: 88% | Class 10th: 89%`,
         ];
-        break; // Add this line
+        break;
       case "projects":
         output = [`<span class="output-header">--- Projects ---</span>`, ""];
         personalInfo.projects.forEach((p) => {
-          // Construct the title with an optional [Link] at the end
           let title = p.name;
           if (p.link) {
             title += ` <a href="${p.link}" target="_blank">[Link]</a>`;
           }
           output.push(`<span class="experience-title">> ${title}</span>`);
 
-          // Split and format the description bullet points
           const bulletPoints = p.description
             .split("<br/>")
             .map((line) => line.trim())
@@ -372,7 +370,7 @@ const Terminal = () => {
             output.push(`<p class="experience-item">${point}</p>`);
           });
 
-          output.push(""); // Add a space after each project
+          output.push("");
         });
         break;
       case "achievements":
@@ -381,16 +379,14 @@ const Terminal = () => {
           "",
         ];
         personalInfo.achievements.forEach((a) => {
-          // Construct the title with the [Link] if it exists
           let title = a.name;
           if (a.link) {
             title += ` <a href="${a.link}" target="_blank">[Link]</a>`;
           }
           output.push(`<span class="experience-title">> ${title}</span>`);
 
-          // Add the description on the next line
           output.push(`${a.description}`);
-          output.push(""); // Add a space after each achievement
+          output.push("");
         });
         break;
       case "skills":
@@ -449,7 +445,7 @@ const Terminal = () => {
               <p style="font-size: 1rem; color: #788399ff;margin-top: -1rem">Made with ❤️ by <b>Ronak Tilokchand Jain</b></p>              
             </div>
           `;
-        }, 2000); // Wait 2 seconds
+        }, 2000);
         return;
       case "email":
         addHistory(`Opening default email client...`);
@@ -466,15 +462,12 @@ const Terminal = () => {
   };
 
   const handleContactInput = async (value) => {
-    // UPDATED: Added step 2 for email
     if (contactStep === 1) {
-      // User entered name
       setContactInfo({ ...contactInfo, name: value });
       addHistory(`> ${value}`);
       addHistory(`Enter your email:`);
       setContactStep(2);
     } else if (contactStep === 2) {
-      // User entered email
       setContactInfo({ ...contactInfo, email: value });
       addHistory(`> ${value}`);
       addHistory(
@@ -482,7 +475,6 @@ const Terminal = () => {
       );
       setContactStep(3);
     } else if (contactStep === 3) {
-      // User entered message
       if (isSubmitting) return;
 
       setIsSubmitting(true);
@@ -492,15 +484,13 @@ const Terminal = () => {
       try {
         const finalContactInfo = { ...contactInfo, message: value };
 
-        // 1. Save to Firebase
         await addDoc(collection(db, "contacts"), {
           name: finalContactInfo.name,
-          email: finalContactInfo.email, // UPDATED
+          email: finalContactInfo.email,
           message: finalContactInfo.message,
           timestamp: new Date(),
         });
 
-        // 2. Send to Telegram
         await fetch("/.netlify/functions/sendMessage", {
           method: "POST",
           body: JSON.stringify(finalContactInfo),
@@ -605,7 +595,6 @@ const Terminal = () => {
   );
 };
 
-// --- Main App component to handle loading logic ---
 function App() {
   const [loading, setLoading] = useState(true);
 
