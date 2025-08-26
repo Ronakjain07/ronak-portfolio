@@ -1,4 +1,4 @@
-import { clarity } from "@microsoft/clarity";
+import clarity from "@microsoft/clarity";
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 // --- Firebase Imports ---
