@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
-
+import { clarity } from "clarity-react";
 // --- Firebase Imports ---
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
@@ -16,6 +16,12 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
+
+// --- Initialize Microsoft Clarity ---
+const CLARITY_PROJECT_ID = process.env.REACT_APP_CLARITY_PROJECT_ID;
+if (CLARITY_PROJECT_ID) {
+  clarity.init(CLARITY_PROJECT_ID);
+}
 
 // --- Initialize Google Analytics ---
 const GA_MEASUREMENT_ID = process.env.REACT_APP_GA_MEASUREMENT_ID;
