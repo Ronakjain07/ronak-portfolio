@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
-import { clarity } from "clarity-react";
+import { clarity } from "@microsoft/clarity";
 // --- Firebase Imports ---
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
