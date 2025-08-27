@@ -327,7 +327,7 @@ const Terminal = () => {
         break;
       case "about":
         output = [
-          `<span class="help-command">Hello I'm Ronak Jain.</span>`,
+          `<span class="help-command">Hello I'm Ronak Jain👋</span>`,
           `<div class="about-container"><img src="/ronak.png" alt="A photo of Ronak Jain" class="profile-photo" /><div class="about-text"> - Web Developer with a strong foundation in web technologies and expertise in modern frameworks. With a solid academic background in Computer Science, I have developed a deep understanding of software development principles, allowing me to approach projects with both technical precision and creative problem-solving.</br> - Fueled by an entrepreneurial spirit, I’m passionate about identifying meaningful problems and transforming them into scalable, impactful solutions. I thrive on turning complex concepts into real-world applications—blending strong technical skills with a sharp, results-driven mindset.</br> - Always eager to collaborate and innovate, I’d love to connect with professionals who are equally excited about technology, startups, and building solutions that truly make a difference.</div></div>`,
         ];
         break;
