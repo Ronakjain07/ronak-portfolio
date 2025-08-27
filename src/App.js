@@ -322,7 +322,7 @@ const Terminal = () => {
           `  <span class="help-command">resume</span>         - Download my resume.`,
           `  <span class="help-command">clear</span>          - Clear the terminal screen.`,
           `  <span class="help-command">exit</span>           - Close the terminal session.`,
-          `  <span class="help-command">game</span>           - Play a game of 'Guess the Number'.`,
+          `  <span class="help-command">game</span>           - Coming sooon!!!.`,
         ];
         break;
       case "about":
