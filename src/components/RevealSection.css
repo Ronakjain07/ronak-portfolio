@@ -1,0 +1,165 @@
+/* ===== Reveal Section v3 — Clean Contact ===== */
+.reveal-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: transparent;
+  padding: 80px 20px 0;
+  position: relative;
+}
+
+/* Noise deleted and moved to global noise in App.css */
+
+.reveal-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  flex: 1;
+  justify-content: center;
+}
+
+/* Statement */
+.reveal-statement {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 16px;
+  perspective: 800px;
+}
+
+.reveal-word {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  display: inline-block;
+  will-change: transform, opacity, filter;
+  letter-spacing: -1px;
+}
+
+/* Accent key words */
+.reveal-word:nth-child(2) {
+  color: var(--accent);
+}
+
+.reveal-word:nth-child(4) {
+  color: var(--accent);
+}
+
+.reveal-sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 480px;
+}
+
+/* CTA */
+.reveal-cta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.reveal-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: var(--text-primary);
+  color: var(--bg-deep);
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s var(--ease-out);
+}
+
+.reveal-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(250, 250, 250, 0.12);
+  color: var(--bg-deep);
+}
+
+.reveal-cta-outline {
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 28px;
+  border: 1px solid var(--text-dim);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s var(--ease-out);
+}
+
+.reveal-cta-outline:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+  transform: translateY(-3px);
+}
+
+/* Footer */
+.footer {
+  padding: 40px 20px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border-top: 1px solid #1a1a1a;
+  margin-top: auto;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-link {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted) !important;
+  text-decoration: none;
+}
+.footer-link:hover { color: var(--text-primary) !important; }
+
+.footer-sep { color: var(--text-dim); }
+
+.footer-credit {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reveal-content { gap: 30px; }
+  .reveal-cta { flex-direction: column; width: 100%; }
+  .reveal-cta-btn, .reveal-cta-outline { width: 100%; justify-content: center; text-align: center; }
+  .footer-links { flex-wrap: wrap; }
+}
+
+@media (max-width: 480px) {
+  .reveal-section { padding: 60px 16px 0; }
+  .reveal-word { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+}
+
+@media (max-width: 380px) {
+  .reveal-word { font-size: 1.6rem; }
+}

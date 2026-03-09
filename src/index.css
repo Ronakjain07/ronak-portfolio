@@ -1,13 +1,102 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ===== Design System v2 — Premium Monochromatic ===== */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Colors — Clean Monochromatic + Single Accent */
+  --bg-deep: #050505;
+  --bg-primary: #0a0a0a;
+  --bg-elevated: #111111;
+  --bg-card: #161616;
+  --bg-hover: #1a1a1a;
+
+  /* Text */
+  --text-primary: #fafafa;
+  --text-secondary: #888888;
+  --text-muted: #555555;
+  --text-dim: #333333;
+
+  /* Accent — Single color for sophistication */
+  --accent: #c0f0ff;
+  --accent-dim: rgba(192, 240, 255, 0.15);
+  --accent-glow: rgba(192, 240, 255, 0.08);
+
+  /* Terminal */
+  --term-bg: #0c0c0c;
+  --term-header: #141414;
+  --term-text: #b4b4b4;
+  --term-prompt: #c0f0ff;
+  --term-green: #7dcea0;
+  --term-red: #e07070;
+  --term-yellow: #d4c070;
+  --term-purple: #b08dd4;
+
+  /* Typography */
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ===== Reset ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  cursor: none;
+}
+
+/* Custom cursor — desktop only */
+@media (hover: hover) and (pointer: fine) {
+  * { cursor: none !important; }
+}
+@media (hover: none) or (pointer: coarse) {
+  body, * { cursor: auto !important; }
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+::selection {
+  background: rgba(192, 240, 255, 0.2);
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg-card); border-radius: 2px; }
+
+/* ===== Section Base ===== */
+.section {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
