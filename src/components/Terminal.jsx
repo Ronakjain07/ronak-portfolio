@@ -363,7 +363,7 @@ const Terminal = ({ db, addDoc, collection }) => {
       case 'success': return <p key={index} className="t-success">{item.content}</p>;
       case 'about-photo': return (
         <div key={index} className="t-photo-row">
-          <img src="/ronak.png" alt="Ronak Jain" className="t-photo" />
+          <img src={process.env.PUBLIC_URL + '/ronak.png'} alt="Ronak Jain" className="t-photo" />
         </div>
       );
       case 'exp-title': return (

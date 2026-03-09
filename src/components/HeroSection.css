@@ -159,8 +159,8 @@
 }
 
 .hero-photo {
-  width: 380px;
-  height: 480px;
+  width: 440px;
+  height: 550px;
   object-fit: cover;
   object-position: center top;
   border-radius: 0;
@@ -298,8 +298,8 @@
   .hero-cta-group { justify-content: center; }
 
   .hero-photo {
-    width: 250px;
-    height: 320px;
+    width: 320px;
+    height: 400px;
   }
 
   .hero-socials {
