@@ -73,8 +73,14 @@ export default function Preloader({ onComplete }) {
         duration: 1,
         ease: 'power4.inOut',
         onStart: () => {
-          handoff()
+          // unlock the app first — the decorative name handoff must never
+          // be able to block interactivity if it throws
           onComplete()
+          try {
+            handoff()
+          } catch {
+            /* purely cosmetic */
+          }
         },
       })
       .set(root.current, { display: 'none' })

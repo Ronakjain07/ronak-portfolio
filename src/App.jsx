@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { sceneState } from './three/sceneState'
@@ -28,11 +28,19 @@ import Contact from './components/Contact'
 
 export default function App() {
   const [ready, setReady] = useState(false)
+  // Under prefers-reduced-motion the preloader completes synchronously in
+  // the CHILD effect phase — before this component's effect creates Lenis.
+  // Its start() call hits nothing, so we must not stop() afterwards or
+  // scrolling locks forever (html.lenis-stopped → overflow: hidden).
+  const preloaderDone = useRef(false)
 
   useEffect(() => {
     const lenis = initSmoothScroll()
-    lenis.stop() // no scrolling behind the preloader
+    if (!preloaderDone.current) lenis.stop() // no scrolling behind the preloader
     window.scrollTo(0, 0)
+
+    // belt & braces: whatever happens, never leave the page scroll-locked
+    const failsafe = setTimeout(() => getLenis()?.start(), 8000)
 
     const setPointer = (x, y) => {
       sceneState.mouse.x = (x / window.innerWidth) * 2 - 1
@@ -59,6 +67,7 @@ export default function App() {
     const cleanupTilt = initTilt()
 
     return () => {
+      clearTimeout(failsafe)
       window.removeEventListener('mousemove', onMouse)
       window.removeEventListener('touchmove', onTouch)
       window.removeEventListener('pointerover', onHover)
@@ -69,6 +78,7 @@ export default function App() {
   }, [])
 
   const onPreloaderDone = useCallback(() => {
+    preloaderDone.current = true
     setReady(true)
     sceneState.opacity = 1 // fade the particle field in with the curtain lift
 
