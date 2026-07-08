@@ -68,8 +68,8 @@ export default function Navbar({ ready }) {
             className={`nav-sound ${sound ? 'is-on' : ''}`}
             onClick={toggleSound}
             aria-pressed={sound}
-            aria-label={sound ? 'Disable interface sound' : 'Enable interface sound'}
-            title={sound ? 'Sound on' : 'Sound off'}
+            aria-label={sound ? 'Disable ambient music & sound' : 'Enable ambient music & sound'}
+            title={sound ? 'Music & sound on' : 'Music & sound off'}
           >
             <span className="nav-sound-bars" aria-hidden="true">
               <span />
