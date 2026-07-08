@@ -140,7 +140,7 @@ export const projects = [
     description:
       'React inventory platform managing 520+ SKUs across 8 quality categories — accuracy up from 76% to 93%, and 45% faster onboarding for factory teams.',
     tags: ['React', 'Context API', 'Data Viz', 'Vercel'],
-    url: 'https://jtm-inventory-manager.vercel.app',
+    url: 'https://github.com/Ronakjain07/jtm-inventory-manager',
     gradient: ['#c98bde', '#2f4fd8'],
   },
   {
