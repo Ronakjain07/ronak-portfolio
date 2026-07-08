@@ -14,7 +14,7 @@ export const profile = {
   location: 'Vellore / Ahmedabad, India',
   email: 'ronaktjain07@gmail.com',
   phone: '+91 93280 87529',
-  availability: 'Open to AI Engineer roles — graduating 2026',
+  availability: 'Currently building agentic AI @ Yellow.ai',
   intro:
     'I build intelligent products end-to-end — LLM pipelines, agentic workflows and the full-stack engineering that ships them. Currently doing exactly that at Yellow.ai.',
   about: [
