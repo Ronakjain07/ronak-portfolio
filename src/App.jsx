@@ -15,6 +15,7 @@ import {
   prefersReducedMotion,
 } from './utils/animations'
 import { tick, thump } from './utils/sound'
+import { gyroSupported, gyroNeedsPermission, startGyro, requestGyro } from './utils/gyro'
 import Preloader from './components/Preloader'
 import Cursor from './components/Cursor'
 import Navbar from './components/Navbar'
@@ -28,6 +29,9 @@ import Contact from './components/Contact'
 
 export default function App() {
   const [ready, setReady] = useState(false)
+  // iOS gates device-orientation behind a user-gesture permission —
+  // show a small chip; Android needs nothing and starts silently
+  const [motionChip, setMotionChip] = useState(false)
   // Under prefers-reduced-motion the preloader completes synchronously in
   // the CHILD effect phase — before this component's effect creates Lenis.
   // Its start() call hits nothing, so we must not stop() afterwards or
@@ -60,6 +64,12 @@ export default function App() {
       if (e.target.closest?.('a, button, [data-hover]')) tick()
     }
     window.addEventListener('pointerover', onHover, { passive: true })
+
+    // device-tilt parallax for touch devices
+    if (!prefersReducedMotion() && gyroSupported()) {
+      if (gyroNeedsPermission()) setMotionChip(true)
+      else startGyro()
+    }
 
     // click/tap → shockwave through the particle field from that point
     const reduced = prefersReducedMotion()
@@ -126,6 +136,18 @@ export default function App() {
         <Achievements />
         <Contact />
       </main>
+
+      {motionChip && (
+        <button
+          className="motion-chip"
+          onClick={async () => {
+            await requestGyro()
+            setMotionChip(false)
+          }}
+        >
+          <span aria-hidden="true">✦</span> Enable tilt effects
+        </button>
+      )}
 
       <div className="grain" aria-hidden="true" />
     </>

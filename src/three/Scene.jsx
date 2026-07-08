@@ -12,8 +12,11 @@ function Rig() {
   useFrame((state, delta) => {
     const cam = state.camera
     const dt = Math.min(delta, 1 / 30)
-    cam.position.x = THREE.MathUtils.damp(cam.position.x, sceneState.mouse.x * 0.85, 2.2, dt)
-    cam.position.y = THREE.MathUtils.damp(cam.position.y, -sceneState.mouse.y * 0.55, 2.2, dt)
+    // tilt steers the camera on touch devices; mouse everywhere else
+    const camX = sceneState.gyro.active ? sceneState.gyro.x : sceneState.mouse.x
+    const camY = sceneState.gyro.active ? sceneState.gyro.y : sceneState.mouse.y
+    cam.position.x = THREE.MathUtils.damp(cam.position.x, camX * 0.85, 2.2, dt)
+    cam.position.y = THREE.MathUtils.damp(cam.position.y, -camY * 0.55, 2.2, dt)
     cam.lookAt(0, 0, 0)
 
     // consume a pending click-shock: unproject its NDC onto the z=0 plane
