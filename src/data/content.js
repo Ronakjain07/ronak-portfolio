@@ -2,9 +2,8 @@
 //  All portfolio content lives here — edit this file to update
 //  the site without touching any component code.
 //
-//  TODO(Ronak): tighten the Yellow.ai bullets + exact dates with
-//  specifics from your LinkedIn — the current copy is intentionally
-//  general since those details aren't public.
+//  TODO(Ronak): the Yellow.ai bullets are intentionally general —
+//  swap in specifics (what you built, tools, numbers) when ready.
 // ─────────────────────────────────────────────────────────────
 
 export const profile = {
@@ -75,7 +74,7 @@ export const experience = [
   {
     company: 'Yellow.ai',
     role: 'AI Intern',
-    period: '2026 — Present',
+    period: 'Mar 2026 — Present',
     location: 'India',
     points: [
       'Working on one of the world’s leading agentic AI platforms — building prompts, conversation flows and automations that power enterprise customer experiences at scale.',
