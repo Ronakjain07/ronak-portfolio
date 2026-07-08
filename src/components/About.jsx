@@ -10,9 +10,15 @@ export default function About() {
         <div className="about-grid">
           <div className="about-portrait fade-up" data-hover data-tilt>
             <div className="about-portrait-inner" data-tilt-inner>
-              <span className="about-monogram">RJ</span>
+              <img
+                className="about-photo"
+                src="/ronak-jain.jpg"
+                alt="Ronak Jain — AI Engineer"
+                loading="lazy"
+                width="900"
+                height="912"
+              />
               <span className="about-portrait-role">{profile.role}</span>
-              <span className="about-portrait-ring" aria-hidden="true" />
             </div>
             <span className="about-glare" aria-hidden="true" />
           </div>

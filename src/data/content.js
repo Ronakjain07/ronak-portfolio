@@ -33,6 +33,7 @@ export const profile = {
     { label: 'GitHub', url: 'https://github.com/Ronakjain07' },
     { label: 'LinkedIn', url: 'https://linkedin.com/in/ronak-jain-rj07' },
     { label: 'Email', url: 'mailto:ronaktjain07@gmail.com' },
+    { label: 'Instagram', url: 'https://www.instagram.com/ronak_jainnn/' },
   ],
   resumeUrl: '/Ronak_Jain_Resume.pdf',
 }
@@ -118,7 +119,7 @@ export const projects = [
     description:
       'A professional business website designed and built from scratch — site traffic up 140%, 38 qualified inquiries in 8 weeks, PageSpeed score raised from 67 to 91.',
     tags: ['JavaScript', 'Firebase', 'SEO', 'Hostinger'],
-    url: 'https://github.com/Ronakjain07',
+    url: 'https://www.vhmtex.com/',
     gradient: ['#f5c26b', '#c2542a'],
   },
   {

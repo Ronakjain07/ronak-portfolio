@@ -3,3 +3,7 @@ dist
 *.local
 .DS_Store
 .claude/
+
+# original camera exports — the optimized copy lives in public/
+IMG_*.png
+IMG_*.jpg
