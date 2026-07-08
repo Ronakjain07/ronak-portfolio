@@ -14,7 +14,7 @@ import {
   initTilt,
   prefersReducedMotion,
 } from './utils/animations'
-import { tick } from './utils/sound'
+import { tick, thump } from './utils/sound'
 import Preloader from './components/Preloader'
 import Cursor from './components/Cursor'
 import Navbar from './components/Navbar'
@@ -61,6 +61,18 @@ export default function App() {
     }
     window.addEventListener('pointerover', onHover, { passive: true })
 
+    // click/tap → shockwave through the particle field from that point
+    const reduced = prefersReducedMotion()
+    const onClick = (e) => {
+      if (reduced) return
+      sceneState.shockRequest = {
+        x: (e.clientX / window.innerWidth) * 2 - 1,
+        y: -((e.clientY / window.innerHeight) * 2 - 1),
+      }
+      thump()
+    }
+    window.addEventListener('click', onClick, { passive: true })
+
     initSceneTriggers()
     initGlobalAnimations()
     const cleanupMagnetic = initMagnetic()
@@ -71,6 +83,7 @@ export default function App() {
       window.removeEventListener('mousemove', onMouse)
       window.removeEventListener('touchmove', onTouch)
       window.removeEventListener('pointerover', onHover)
+      window.removeEventListener('click', onClick)
       cleanupMagnetic()
       cleanupTilt()
       ScrollTrigger.getAll().forEach((t) => t.kill())

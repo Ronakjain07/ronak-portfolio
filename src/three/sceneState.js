@@ -47,6 +47,11 @@ export const sceneState = {
   hasPointer: false, // no repulsion until real input arrives
   pointer3: { x: 999, y: 999, z: 0 }, // cursor on the z=0 world plane
   repel: 0,
+  // click shockwave: NDC request consumed by the camera rig, which
+  // unprojects it and resets the elapsed clock read by the shader
+  shockRequest: null,
+  shock: { x: 0, y: 0, z: 0 },
+  shockElapsed: 1000, // seconds since last shock; large = idle
   colorA: hexToLinearRgb(SCENES[0].colorA),
   colorB: hexToLinearRgb(SCENES[0].colorB),
 }

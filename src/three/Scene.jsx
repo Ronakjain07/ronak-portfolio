@@ -16,9 +16,26 @@ function Rig() {
     cam.position.y = THREE.MathUtils.damp(cam.position.y, -sceneState.mouse.y * 0.55, 2.2, dt)
     cam.lookAt(0, 0, 0)
 
+    // consume a pending click-shock: unproject its NDC onto the z=0 plane
+    if (sceneState.shockRequest) {
+      const req = sceneState.shockRequest
+      sceneState.shockRequest = null
+      ndc.set(req.x, req.y, 0.5).unproject(cam)
+      const sdir = ndc.sub(cam.position).normalize()
+      if (Math.abs(sdir.z) > 1e-4) {
+        const st = -cam.position.z / sdir.z
+        sceneState.shock.x = cam.position.x + sdir.x * st
+        sceneState.shock.y = cam.position.y + sdir.y * st
+        sceneState.shock.z = 0
+        sceneState.shockElapsed = 0
+      }
+    }
+
     if (!sceneState.hasPointer) return
 
-    ndc.set(sceneState.mouse.x, sceneState.mouse.y, 0.5).unproject(cam)
+    // NOTE: sceneState.mouse.y is screen-style (down-positive); NDC wants
+    // up-positive, hence the negation
+    ndc.set(sceneState.mouse.x, -sceneState.mouse.y, 0.5).unproject(cam)
     const dir = ndc.sub(cam.position).normalize()
     if (Math.abs(dir.z) < 1e-4) return
     const t = -cam.position.z / dir.z

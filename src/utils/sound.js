@@ -60,6 +60,24 @@ export function tick(force = false) {
   osc.stop(ac.currentTime + 0.07)
 }
 
+// Low, soft thump for the click shockwave.
+export function thump() {
+  if (!enabled) return
+  const ac = ensureCtx()
+  if (!ac || ac.state !== 'running') return
+
+  const osc = ac.createOscillator()
+  const gain = ac.createGain()
+  osc.type = 'sine'
+  osc.frequency.setValueAtTime(120, ac.currentTime)
+  osc.frequency.exponentialRampToValueAtTime(45, ac.currentTime + 0.18)
+  gain.gain.setValueAtTime(0.09, ac.currentTime)
+  gain.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.22)
+  osc.connect(gain).connect(ac.destination)
+  osc.start()
+  osc.stop(ac.currentTime + 0.24)
+}
+
 // Soft filtered-noise sweep for section transitions.
 export function whoosh() {
   if (!enabled) return

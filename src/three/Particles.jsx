@@ -13,6 +13,8 @@ const vertexShader = /* glsl */ `
   uniform float uVelocity;
   uniform vec3 uPointer;
   uniform float uRepel;
+  uniform vec3 uShock;
+  uniform float uShockTime;
   uniform vec3 uColorA;
   uniform vec3 uColorB;
 
@@ -65,6 +67,14 @@ const vertexShader = /* glsl */ `
     float force = uRepel * smoothstep(1.7, 0.0, pd);
     p += (toP / max(pd, 0.001)) * force * 0.55;
 
+    // click shockwave: a gaussian ring races outward from the click,
+    // pushing particles as the front passes, amplitude decaying with time
+    float sd = length(p - uShock);
+    float sFront = uShockTime * 5.5;
+    float sRing = exp(-pow((sd - sFront) * 2.4, 2.0));
+    float sDecay = exp(-uShockTime * 1.7);
+    p += (p - uShock) / max(sd, 0.001) * sRing * sDecay * 0.85;
+
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
     // letters pack thousands of particles into a small area — shrink and
@@ -72,6 +82,8 @@ const vertexShader = /* glsl */ `
     gl_PointSize = uSize * (0.5 + aRand * 0.95) * (30.0 / -mv.z) * (1.0 - uNameMix * 0.38);
 
     vAlpha = (0.35 + 0.65 * aRand) * (1.0 - uNameMix * 0.22);
+    // particles flare briefly as the shock front passes through them
+    vAlpha += sRing * sDecay * 0.7;
     float mixT = clamp(p.y * 0.22 + 0.5 + 0.25 * sin(aRand * 6.2831 + uTime * 0.2), 0.0, 1.0);
     vColor = mix(uColorB, uColorA, mixT);
   }
@@ -95,6 +107,7 @@ const fragmentShader = /* glsl */ `
 
 const Y_AXIS = new THREE.Vector3(0, 1, 0)
 const pointerLocal = new THREE.Vector3()
+const shockLocal = new THREE.Vector3()
 
 export default function Particles() {
   const material = useRef()
@@ -135,6 +148,8 @@ export default function Particles() {
       uVelocity: { value: 0 },
       uPointer: { value: new THREE.Vector3(999, 999, 0) },
       uRepel: { value: 0 },
+      uShock: { value: new THREE.Vector3(0, 0, 0) },
+      uShockTime: { value: 1000 },
       uOpacity: { value: 0 },
       // sceneState stores pre-linearized rgb floats (it can't import three)
       uColorA: { value: new THREE.Color(sceneState.colorA.r, sceneState.colorA.g, sceneState.colorA.b) },
@@ -184,6 +199,14 @@ export default function Particles() {
       .set(sceneState.pointer3.x, sceneState.pointer3.y, sceneState.pointer3.z)
       .applyAxisAngle(Y_AXIS, -points.current.rotation.y)
     u.uPointer.value.copy(pointerLocal)
+
+    // shockwave clock + click point (also rotated into object space)
+    sceneState.shockElapsed = Math.min(sceneState.shockElapsed + dt, 1000)
+    u.uShockTime.value = sceneState.shockElapsed
+    shockLocal
+      .set(sceneState.shock.x, sceneState.shock.y, sceneState.shock.z)
+      .applyAxisAngle(Y_AXIS, -points.current.rotation.y)
+    u.uShock.value.copy(shockLocal)
   })
 
   return (
