@@ -3,6 +3,7 @@ import { navLinks, profile } from '../data/content'
 import { getLenis, scrollToTarget } from '../utils/smooth'
 import { initSound, setSound } from '../utils/sound'
 import { sceneState } from '../three/sceneState'
+import { recordSecret } from '../utils/secrets'
 
 export default function Navbar({ ready }) {
   const [hidden, setHidden] = useState(false)
@@ -36,15 +37,25 @@ export default function Navbar({ ready }) {
     scrollToTarget(href)
   }
 
-  // easter egg: five quick clicks on the logo → the field forms a heart
+  // easter egg: five quick clicks on the logo → the field forms a heart.
+  // Each click makes the dot pop harder — the feedback IS the hint.
   const brandClicks = useRef([])
+  const [dotPop, setDotPop] = useState(0)
+  const popTimer = useRef()
   const onBrand = (e) => {
     go(e, 0)
     const now = Date.now()
     brandClicks.current = [...brandClicks.current.filter((t) => now - t < 3000), now]
-    if (brandClicks.current.length >= 5) {
+    const streak = brandClicks.current.length
+
+    setDotPop(Math.min(streak, 4))
+    clearTimeout(popTimer.current)
+    popTimer.current = setTimeout(() => setDotPop(0), 600)
+
+    if (streak >= 5) {
       brandClicks.current = []
       sceneState.formationRequest = { kind: 'heart', hold: 2, tag: 'heart' }
+      recordSecret('heart')
     }
   }
 
@@ -65,7 +76,7 @@ export default function Navbar({ ready }) {
         ].join(' ')}
       >
         <a className="nav-brand" href="#top" onClick={onBrand} data-hover>
-          Ronak<span className="nav-brand-dot">.</span>
+          Ronak<span className={`nav-brand-dot ${dotPop ? `pop-${dotPop}` : ''}`}>.</span>
         </a>
 
         <nav className="nav-links" aria-label="Primary">

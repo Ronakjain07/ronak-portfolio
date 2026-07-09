@@ -26,6 +26,8 @@ import Experience from './components/Experience'
 import Projects from './components/Projects'
 import Achievements from './components/Achievements'
 import Contact from './components/Contact'
+import SecretToast from './components/SecretToast'
+import { recordSecret } from './utils/secrets'
 
 export default function App() {
   const [ready, setReady] = useState(false)
@@ -81,6 +83,7 @@ export default function App() {
         if ((getLenis()?.scroll ?? 0) < 100 && document.visibilityState === 'visible') {
           // forms low, in the open dune area — the big title is above
           sceneState.formationRequest = { kind: 'text', text: 'SCROLL', hold: 1.6, tag: 'idle', y: -1.05 }
+          recordSecret('idle')
         }
         armIdle() // re-arm for the truly mesmerised
       }, 12000)
@@ -100,6 +103,16 @@ export default function App() {
       thump()
     }
     window.addEventListener('click', onClick, { passive: true })
+
+    // console whisper for the developers & recruiters who peek
+    console.log(
+      '%c✦ psst%c — the logo likes being clicked. five times, fast.\n' +
+        'There are 3 secrets on this page. Happy hunting.\n' +
+        '%c— Ronak · built with R3F, GSAP & GLSL · github.com/Ronakjain07/ronak-portfolio',
+      'color:#eeb96b;font-size:18px;font-weight:700;font-style:italic;font-family:Georgia,serif',
+      'color:#cfc8bc;font-size:12px;font-family:sans-serif',
+      'color:#8f887c;font-size:11px;font-family:sans-serif',
+    )
 
     initSceneTriggers()
     initGlobalAnimations()
@@ -157,6 +170,8 @@ export default function App() {
         <Achievements />
         <Contact />
       </main>
+
+      <SecretToast />
 
       {motionChip && (
         <button

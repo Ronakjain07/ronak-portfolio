@@ -113,7 +113,9 @@ export default function Contact() {
         <div className="container footer-inner">
           <p>© 2026 {profile.name}</p>
           <LocalTime />
-          <p className="footer-stack">Designed &amp; built with React Three Fiber, GSAP &amp; GLSL</p>
+          <p className="footer-stack">
+            Designed &amp; built with React Three Fiber, GSAP &amp; GLSL · 3 secrets hidden ✦
+          </p>
           <button className="footer-top" onClick={() => scrollToTarget(0)} data-hover>
             Back to top ↑
           </button>

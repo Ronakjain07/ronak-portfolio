@@ -2,6 +2,7 @@ import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { sceneState } from '../three/sceneState'
+import { recordSecret } from './secrets'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -31,6 +32,7 @@ export function initSmoothScroll() {
     if (!reducedMotion && e.scroll >= e.limit - 6 && Date.now() - lastSayHi > 40000) {
       lastSayHi = Date.now()
       sceneState.formationRequest = { kind: 'text', text: 'SAY HI', hold: 2, tag: 'sayhi' }
+      recordSecret('sayhi')
     }
     ScrollTrigger.update()
   })

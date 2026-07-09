@@ -94,6 +94,34 @@ ul {
   border-radius: 4px;
 }
 
+/* Easter-egg found toast */
+.secret-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.6rem;
+  transform: translate(-50%, 12px);
+  z-index: 70;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--accent);
+  background: rgba(10, 9, 8, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(238, 185, 107, 0.4);
+  border-radius: 999px;
+  padding: 0.6em 1.5em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+  white-space: nowrap;
+}
+
+.secret-toast.is-on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 /* iOS motion-permission chip (touch devices only) */
 .motion-chip {
   position: fixed;
@@ -552,6 +580,29 @@ main {
 
 .nav-brand-dot {
   color: var(--accent);
+  display: inline-block;
+  transition: transform 0.35s var(--ease-out), text-shadow 0.35s, color 0.35s;
+}
+
+/* each quick click pops the dot harder — the feedback is the hint */
+.nav-brand-dot.pop-1 {
+  transform: scale(1.7);
+}
+
+.nav-brand-dot.pop-2 {
+  transform: scale(2.1);
+  text-shadow: 0 0 12px rgba(238, 185, 107, 0.8);
+}
+
+.nav-brand-dot.pop-3 {
+  transform: scale(2.6);
+  text-shadow: 0 0 18px rgba(238, 185, 107, 0.9);
+}
+
+.nav-brand-dot.pop-4 {
+  transform: scale(3.2);
+  color: #ffd27d;
+  text-shadow: 0 0 26px rgba(255, 210, 125, 1);
 }
 
 .nav-links {
