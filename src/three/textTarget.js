@@ -23,7 +23,7 @@ export async function sampleTextPositions(text, count, worldWidth, yOffset = 0.3
   try {
     await Promise.race([
       document.fonts.load('800 140px Syne'),
-      new Promise((resolve) => setTimeout(resolve, 1500)),
+      new Promise((resolve) => setTimeout(resolve, 3500)), // slow networks: wait for the real font
     ])
   } catch {
     // fall through — a fallback bold sans still reads fine as particles
@@ -67,11 +67,29 @@ export async function sampleTextPositions(text, count, worldWidth, yOffset = 0.3
   const cy = (minY + maxY) / 2
   const sampleCount = points.length / 2
 
+  // Syne 800 is ~9:1 wide for a word like RONAK — width-fitted to a
+  // phone the letters come out shorter than the particle glow blobs.
+  // Stretch Y toward a minimum readable height (desktop hits 1×).
+  const naturalH = (maxY - minY) * scale
+  const yStretch = Math.min(Math.max(0.5 / Math.max(naturalH, 0.001), 1), 2.2)
+  // diagnostics for the headless checks
+  window.__samplerDebug = {
+    text,
+    inkW: maxX - minX,
+    inkH: maxY - minY,
+    naturalH: +naturalH.toFixed(3),
+    yStretch: +yStretch.toFixed(2),
+  }
+
   const out = new Float32Array(count * 3)
   for (let i = 0; i < count; i++) {
-    const s = (i % sampleCount) * 2
+    // random ink point, NOT sequential: points are in scanline order, so
+    // with fewer particles than ink pixels (mobile) sequential assignment
+    // covers only the top rows of the glyphs — an unreadable smear
+    const s = Math.floor(Math.random() * sampleCount) * 2
     out[i * 3] = (points[s] - cx) * scale + (Math.random() - 0.5) * 0.03
-    out[i * 3 + 1] = -(points[s + 1] - cy) * scale + yOffset + (Math.random() - 0.5) * 0.03
+    out[i * 3 + 1] =
+      -(points[s + 1] - cy) * scale * yStretch + yOffset + (Math.random() - 0.5) * 0.03
     out[i * 3 + 2] = (Math.random() - 0.5) * 0.18
   }
   return out

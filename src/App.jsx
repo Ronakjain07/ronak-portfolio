@@ -31,6 +31,9 @@ import { recordSecret } from './utils/secrets'
 
 export default function App() {
   const [ready, setReady] = useState(false)
+  // hero entrance is choreographed against the name intro, which on slow
+  // networks starts later than the preloader — separate signal
+  const [showHero, setShowHero] = useState(false)
   // iOS gates device-orientation behind a user-gesture permission —
   // show a small chip; Android needs nothing and starts silently
   const [motionChip, setMotionChip] = useState(false)
@@ -138,14 +141,35 @@ export default function App() {
     setReady(true)
     sceneState.opacity = 1 // fade the particle field in with the curtain lift
 
-    // signature moment: the field assembles into "RONAK", holds,
-    // then bursts into the golden dunes as the headline slides in
+    // signature moment: the field assembles into "RONAK", holds, then
+    // bursts into the golden dunes as the headline slides in. On mobile
+    // networks the three.js chunk can arrive AFTER the preloader, so the
+    // sequence waits for the sampled name targets instead of racing them.
     if (!prefersReducedMotion()) {
-      sceneState.nameMix = 1
-      gsap.delayedCall(2.6, () => {
-        sceneState.nameMix = 0
-        sceneState.formationTag = '' // intro done — eggs may use the slot
-      })
+      const beginIntro = () => {
+        sceneState.nameMix = 1
+        setShowHero(true) // hero timeline starts its 1.9s delay now
+        gsap.delayedCall(2.6, () => {
+          sceneState.nameMix = 0
+          sceneState.formationTag = '' // intro done — eggs may use the slot
+        })
+      }
+      if (sceneState.nameReady) beginIntro()
+      else {
+        const started = Date.now()
+        const waiter = setInterval(() => {
+          if (sceneState.nameReady) {
+            clearInterval(waiter)
+            beginIntro()
+          } else if (Date.now() - started > 8000) {
+            clearInterval(waiter) // hopeless connection — skip the intro
+            sceneState.formationTag = ''
+            setShowHero(true)
+          }
+        }, 100)
+      }
+    } else {
+      setShowHero(true)
     }
 
     getLenis()?.start()
@@ -162,7 +186,7 @@ export default function App() {
       <Navbar ready={ready} />
 
       <main>
-        <Hero ready={ready} />
+        <Hero ready={showHero} />
         <About />
         <Skills />
         <Experience />

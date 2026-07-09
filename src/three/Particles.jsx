@@ -120,19 +120,43 @@ export default function Particles() {
     return { ...shapes, name: new Float32Array(shapes.burst) }
   }, [count])
 
-  // Sample "RONAK" once fonts are ready and swap it into the aName attribute.
+  // Sample "RONAK" once fonts are ready and swap it into the aName
+  // attribute. No minimum-width floor: on phones the old 3.4-unit floor
+  // exceeded the visible width and clipped the letters at the edges.
   useEffect(() => {
     let cancelled = false
     const aspect = window.innerWidth / Math.max(window.innerHeight, 1)
     const visibleWidth = 2 * Math.tan(THREE.MathUtils.degToRad(55 / 2)) * 7 * aspect
-    const worldWidth = THREE.MathUtils.clamp(visibleWidth * 0.85, 3.4, 7.4)
+    const worldWidth = Math.min(visibleWidth * 0.85, 7.4)
 
     sampleTextPositions('RONAK', count, worldWidth).then((positions) => {
       window.__nameSampled = !!positions // verification hook for headless checks
+      if (positions) {
+        // diagnostic bounds — cheap, and invaluable when a device renders
+        // the formation wrong (font fallbacks, viewport math, …)
+        let minX = 1e9
+        let maxX = -1e9
+        let minY = 1e9
+        let maxY = -1e9
+        for (let i = 0; i < positions.length; i += 3) {
+          if (positions[i] < minX) minX = positions[i]
+          if (positions[i] > maxX) maxX = positions[i]
+          if (positions[i + 1] < minY) minY = positions[i + 1]
+          if (positions[i + 1] > maxY) maxY = positions[i + 1]
+        }
+        window.__nameBounds = {
+          worldWidth: +worldWidth.toFixed(2),
+          w: +(maxX - minX).toFixed(2),
+          h: +(maxY - minY).toFixed(2),
+        }
+      }
       if (cancelled || !positions || !points.current) return
       const attr = points.current.geometry.getAttribute('aName')
       attr.array.set(positions)
       attr.needsUpdate = true
+      // the intro sequence waits for this — on mobile networks this
+      // chunk arrives well after the preloader finishes
+      sceneState.nameReady = true
     })
     return () => {
       cancelled = true
@@ -179,7 +203,7 @@ export default function Particles() {
         : sampleTextPositions(
             req.text,
             count,
-            THREE.MathUtils.clamp(visibleWidth * 0.85, 3.4, 7.4),
+            Math.min(visibleWidth * 0.85, 7.4),
             req.y ?? 0.35, // some eggs form lower to dodge page content
           )
 

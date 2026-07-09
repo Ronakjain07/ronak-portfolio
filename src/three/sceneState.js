@@ -42,6 +42,7 @@ export const sceneState = {
   dim: SCENES[0].dim,
   opacity: 0, // faded in once the preloader finishes
   nameMix: 0, // 1 = particles form the current formation target
+  nameReady: false, // true once the RONAK targets are sampled & uploaded
   // easter-egg formation queue: Particles consumes the request, rewrites
   // the target attribute, and raises nameMix. tag marks who owns the
   // current formation ('intro' = the load sequence, killed by scrolling).

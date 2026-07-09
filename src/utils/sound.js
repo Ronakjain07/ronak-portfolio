@@ -28,7 +28,10 @@ export function initSound() {
     // gesture, so arm a one-time listener to start the ambience
     const arm = () => {
       window.removeEventListener('pointerdown', arm)
-      if (enabled && ensureCtx()) startMusic()
+      if (!enabled) return
+      const ac = ensureCtx()
+      if (!ac) return
+      Promise.resolve(ac.resume()).then(() => startMusic()).catch(() => {})
     }
     window.addEventListener('pointerdown', arm, { once: true })
   }
@@ -42,9 +45,15 @@ export function setSound(on) {
   } catch {
     // private mode — sound still works for this visit
   }
-  if (on && ensureCtx()) {
-    tick(true)
-    startMusic()
+  if (on) {
+    const ac = ensureCtx() // inside the toggle click — a real gesture
+    if (!ac) return
+    Promise.resolve(ac.resume())
+      .then(() => {
+        tick(true)
+        startMusic()
+      })
+      .catch(() => {})
   } else {
     stopMusic()
   }
@@ -55,12 +64,14 @@ export function isSoundEnabled() {
 }
 
 // Short glassy blip for hovers, throttled so rapid sweeps don't machine-gun.
+// Never creates/resumes the context — hover isn't a user gesture, and
+// Chrome logs a warning if audio tries to start from one.
 export function tick(force = false) {
   if (!enabled) return
   const now = performance.now()
   if (!force && now - lastTick < 70) return
   lastTick = now
-  const ac = ensureCtx()
+  const ac = ctx
   if (!ac || ac.state !== 'running') return
 
   const osc = ac.createOscillator()
@@ -236,7 +247,7 @@ export function stopMusic() {
 // Low, soft thump for the click shockwave.
 export function thump() {
   if (!enabled) return
-  const ac = ensureCtx()
+  const ac = ctx
   if (!ac || ac.state !== 'running') return
 
   const osc = ac.createOscillator()
@@ -251,10 +262,11 @@ export function thump() {
   osc.stop(ac.currentTime + 0.24)
 }
 
-// Soft filtered-noise sweep for section transitions.
+// Soft filtered-noise sweep for section transitions (scroll isn't a
+// gesture either — same no-create rule as tick).
 export function whoosh() {
   if (!enabled) return
-  const ac = ensureCtx()
+  const ac = ctx
   if (!ac || ac.state !== 'running') return
 
   const dur = 0.5
