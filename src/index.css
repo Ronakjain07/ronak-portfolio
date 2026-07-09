@@ -935,11 +935,58 @@ main {
   border-color: rgba(238, 185, 107, 0.45);
 }
 
-.about-portrait-inner {
+/* 3D-avatar / real-photo flip card */
+.about-portrait {
+  perspective: 1200px;
+}
+
+.about-flip {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform-style: preserve-3d;
+  transition: transform 0.8s var(--ease-inout);
+}
+
+.about-portrait.is-flipped .about-flip {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
   position: absolute;
   inset: 0;
   border-radius: inherit;
   overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+.flip-btn {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 2;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(10, 9, 8, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(238, 185, 107, 0.35);
+  border-radius: 999px;
+  padding: 0.6em 1.1em;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.flip-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .about-photo {
@@ -953,8 +1000,7 @@ main {
 }
 
 /* warm grade + darkened base so the role chip stays legible */
-.about-portrait-inner::after {
-  content: '';
+.photo-grade {
   position: absolute;
   inset: 0;
   background:
@@ -983,22 +1029,9 @@ main {
   padding: 0.55em 1.3em;
 }
 
-.about-glare {
+.about-portrait canvas {
   position: absolute;
   inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    420px circle at var(--gx, 50%) var(--gy, 50%),
-    rgba(255, 255, 255, 0.09),
-    transparent 55%
-  );
-  opacity: 0;
-  transition: opacity 0.4s;
-  pointer-events: none;
-}
-
-.about-portrait:hover .about-glare {
-  opacity: 1;
 }
 
 @keyframes spin {

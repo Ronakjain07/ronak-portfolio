@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  body { margin: 0; background: #0a0908; }
+  canvas { display: block; }
+</style>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.177.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.177.0/examples/jsm/"
+    }
+  }
+</script>
+</head>
+<body>
+<script type="module">
+  import * as THREE from 'three'
+  import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true })
+  renderer.setSize(innerWidth, innerHeight)
+  renderer.setPixelRatio(1)
+  renderer.toneMapping = THREE.ACESFilmicToneMapping
+  document.body.appendChild(renderer.domElement)
+
+  const scene = new THREE.Scene()
+  scene.background = new THREE.Color('#0a0908')
+  const camera = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, 0.01, 50)
+
+  // site-matched lighting: warm gold key, cool rim, soft fill
+  scene.add(new THREE.AmbientLight('#3a3430', 1.2))
+  const key = new THREE.DirectionalLight('#ffd9a0', 2.6)
+  key.position.set(1.5, 2, 2)
+  scene.add(key)
+  const rim = new THREE.DirectionalLight('#8fb8ff', 1.6)
+  rim.position.set(-2, 1.5, -1.5)
+  scene.add(rim)
+  const fill = new THREE.DirectionalLight('#c2542a', 0.7)
+  fill.position.set(-1, 0.4, 2)
+  scene.add(fill)
+
+  let model = null
+  let mixer = null
+  const clock = new THREE.Clock()
+
+  new GLTFLoader().load('/model-avatar.glb', (gltf) => {
+    model = gltf.scene
+    scene.add(model)
+
+    const box = new THREE.Box3().setFromObject(model)
+    const size = box.getSize(new THREE.Vector3())
+    const head = box.max.y - size.y * 0.14
+
+    window.__info = {
+      animations: gltf.animations.map((a) => `${a.name} (${a.duration.toFixed(1)}s)`),
+      height: +size.y.toFixed(2),
+      width: +size.x.toFixed(2),
+    }
+    if (gltf.animations.length) {
+      mixer = new THREE.AnimationMixer(model)
+      mixer.clipAction(gltf.animations[0]).play()
+    }
+
+    window.__frame = (mode) => {
+      if (mode === 'bust') {
+        camera.position.set(0, head - 0.02, size.y * 0.62)
+        camera.lookAt(0, head - 0.05, 0)
+      } else {
+        const mid = (box.min.y + box.max.y) / 2
+        camera.position.set(0, mid + size.y * 0.05, size.y * 1.7)
+        camera.lookAt(0, mid, 0)
+      }
+    }
+    window.__angle = (rad) => {
+      model.rotation.y = rad
+    }
+    window.__frame('bust')
+    window.__loaded = true
+  })
+
+  renderer.setAnimationLoop(() => {
+    if (mixer) mixer.update(clock.getDelta())
+    renderer.render(scene, camera)
+  })
+</script>
+</body>
+</html>

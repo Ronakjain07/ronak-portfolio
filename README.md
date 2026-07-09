@@ -58,6 +58,24 @@ cards with a generated share image (`public/og.png`), and JSON-LD
   instead of ~357KB — keep it that way: **never import `three` in
   `src/three/sceneState.js`** (it's pulled by the main bundle).
 
+## Swapping the 3D avatar
+
+The About card loads whatever lives at `public/avatar.glb`. To change it:
+
+1. Export a new avatar from [Avaturn](https://hub.avaturn.me) ("Avatar with
+   animation") and save it as `model-avatar.glb` in the project root
+   (gitignored — only the optimized copy ships)
+2. `npm run avatar` — compresses it (~4MB → ~1MB) into `public/avatar.glb`
+3. `npm run build`, then `node scripts/check-avatar.mjs <shots-dir>` to
+   verify framing and that the gaze follows the cursor correctly
+
+Assumptions baked into `src/components/AvatarCard.jsx`: a humanoid rig with
+bones matching /head/ and /spine/ (any Avaturn/Mixamo-style export), standing
+~1.9 units tall at the origin (the camera is fixed at head height), and an
+optional idle clip whose head/neck/spine tracks get stripped so the cursor
+owns the gaze. A model from a different pipeline may need the camera height
+or gaze signs re-tuned — the check script exists for exactly that.
+
 ## Deploying
 
 Any static host works. Zero-config options:
