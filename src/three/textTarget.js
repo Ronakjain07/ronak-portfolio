@@ -1,5 +1,23 @@
 // Samples text glyphs from an offscreen canvas into particle positions.
-// Used for the "RONAK" formation the field assembles into on load.
+// Used for the "RONAK" formation the field assembles into on load, and
+// for the easter-egg formations (SAY HI, SCROLL, the heart).
+
+// Filled parametric heart, denser toward the outline.
+export function sampleHeartPositions(count, worldWidth, yOffset = 0.25) {
+  const out = new Float32Array(count * 3)
+  const scale = worldWidth / 32 // curve spans x ≈ ±16
+  for (let i = 0; i < count; i++) {
+    const t = Math.random() * Math.PI * 2
+    const r = Math.pow(Math.random(), 0.35) // fill, biased to the edge
+    const x = 16 * Math.pow(Math.sin(t), 3) * r
+    const y =
+      (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) * r
+    out[i * 3] = x * scale + (Math.random() - 0.5) * 0.05
+    out[i * 3 + 1] = y * scale + yOffset + (Math.random() - 0.5) * 0.05
+    out[i * 3 + 2] = (Math.random() - 0.5) * 0.3
+  }
+  return out
+}
 
 export async function sampleTextPositions(text, count, worldWidth, yOffset = 0.35) {
   try {

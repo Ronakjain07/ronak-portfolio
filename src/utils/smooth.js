@@ -16,10 +16,22 @@ export function initSmoothScroll() {
     smoothWheel: true,
   })
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  let lastSayHi = 0
+
   lenis.on('scroll', (e) => {
     sceneState.velocity = e.velocity
-    // if the visitor scrolls off during the name formation, release it
-    if (e.scroll > 240) sceneState.nameMix = 0
+    // if the visitor scrolls off during the intro name formation, release
+    // it — but leave easter-egg formations (which happen mid-page) alone
+    if (e.scroll > 240 && sceneState.formationTag === 'intro') {
+      sceneState.nameMix = 0
+      sceneState.formationTag = ''
+    }
+    // easter egg: reaching the very bottom makes the starfield say hi
+    if (!reducedMotion && e.scroll >= e.limit - 6 && Date.now() - lastSayHi > 40000) {
+      lastSayHi = Date.now()
+      sceneState.formationRequest = { kind: 'text', text: 'SAY HI', hold: 2, tag: 'sayhi' }
+    }
     ScrollTrigger.update()
   })
 

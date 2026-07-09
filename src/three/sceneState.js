@@ -41,7 +41,12 @@ export const sceneState = {
   spin: SCENES[0].spin,
   dim: SCENES[0].dim,
   opacity: 0, // faded in once the preloader finishes
-  nameMix: 0, // 1 = particles form the "RONAK" glyphs
+  nameMix: 0, // 1 = particles form the current formation target
+  // easter-egg formation queue: Particles consumes the request, rewrites
+  // the target attribute, and raises nameMix. tag marks who owns the
+  // current formation ('intro' = the load sequence, killed by scrolling).
+  formationRequest: null, // { kind: 'text'|'heart', text?, hold, tag }
+  formationTag: 'intro',
   velocity: 0, // scroll velocity → particle turbulence
   mouse: { x: 0, y: 0 },
   hasPointer: false, // no repulsion until real input arrives

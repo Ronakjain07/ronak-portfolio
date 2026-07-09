@@ -71,6 +71,23 @@ export default function App() {
       else startGyro()
     }
 
+    // easter egg: linger on the hero for 45s without input and the
+    // dunes whisper a hint
+    let idleTimer
+    const armIdle = () => {
+      clearTimeout(idleTimer)
+      if (prefersReducedMotion()) return
+      idleTimer = setTimeout(() => {
+        if ((getLenis()?.scroll ?? 0) < 100 && document.visibilityState === 'visible') {
+          sceneState.formationRequest = { kind: 'text', text: 'SCROLL', hold: 1.6, tag: 'idle' }
+        }
+        armIdle() // re-arm for the truly mesmerised
+      }, 45000)
+    }
+    const idleEvents = ['scroll', 'pointerdown', 'keydown', 'wheel', 'touchstart']
+    idleEvents.forEach((ev) => window.addEventListener(ev, armIdle, { passive: true }))
+    armIdle()
+
     // click/tap → shockwave through the particle field from that point
     const reduced = prefersReducedMotion()
     const onClick = (e) => {
@@ -90,6 +107,8 @@ export default function App() {
 
     return () => {
       clearTimeout(failsafe)
+      clearTimeout(idleTimer)
+      idleEvents.forEach((ev) => window.removeEventListener(ev, armIdle))
       window.removeEventListener('mousemove', onMouse)
       window.removeEventListener('touchmove', onTouch)
       window.removeEventListener('pointerover', onHover)
@@ -111,6 +130,7 @@ export default function App() {
       sceneState.nameMix = 1
       gsap.delayedCall(2.6, () => {
         sceneState.nameMix = 0
+        sceneState.formationTag = '' // intro done — eggs may use the slot
       })
     }
 

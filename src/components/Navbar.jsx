@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { navLinks, profile } from '../data/content'
 import { getLenis, scrollToTarget } from '../utils/smooth'
 import { initSound, setSound } from '../utils/sound'
+import { sceneState } from '../three/sceneState'
 
 export default function Navbar({ ready }) {
   const [hidden, setHidden] = useState(false)
@@ -35,6 +36,18 @@ export default function Navbar({ ready }) {
     scrollToTarget(href)
   }
 
+  // easter egg: five quick clicks on the logo → the field forms a heart
+  const brandClicks = useRef([])
+  const onBrand = (e) => {
+    go(e, 0)
+    const now = Date.now()
+    brandClicks.current = [...brandClicks.current.filter((t) => now - t < 3000), now]
+    if (brandClicks.current.length >= 5) {
+      brandClicks.current = []
+      sceneState.formationRequest = { kind: 'heart', hold: 2, tag: 'heart' }
+    }
+  }
+
   const toggleSound = () => {
     const next = !sound
     setSoundState(next)
@@ -51,7 +64,7 @@ export default function Navbar({ ready }) {
           scrolled ? 'is-scrolled' : '',
         ].join(' ')}
       >
-        <a className="nav-brand" href="#top" onClick={(e) => go(e, 0)} data-hover>
+        <a className="nav-brand" href="#top" onClick={onBrand} data-hover>
           Ronak<span className="nav-brand-dot">.</span>
         </a>
 

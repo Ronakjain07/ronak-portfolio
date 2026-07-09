@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { generateShapes } from './shapes'
-import { sampleTextPositions } from './textTarget'
+import { sampleTextPositions, sampleHeartPositions } from './textTarget'
 import { sceneState } from './sceneState'
 
 const vertexShader = /* glsl */ `
@@ -158,9 +158,52 @@ export default function Particles() {
     [],
   )
 
+  // Easter-egg formations: when idle, consume a request by rewriting the
+  // aName attribute with new targets, then raise nameMix; release after
+  // the hold and (for the heart) pop a shockwave on the way out.
+  const forming = useRef(false)
+  const consumeFormation = () => {
+    if (forming.current || !sceneState.formationRequest) return
+    if (sceneState.nameMix !== 0) return
+    const req = sceneState.formationRequest
+    sceneState.formationRequest = null
+    forming.current = true
+
+    const aspect = window.innerWidth / Math.max(window.innerHeight, 1)
+    const visibleWidth = 2 * Math.tan(THREE.MathUtils.degToRad(55 / 2)) * 7 * aspect
+    const build =
+      req.kind === 'heart'
+        ? Promise.resolve(
+            sampleHeartPositions(count, THREE.MathUtils.clamp(visibleWidth * 0.5, 2.4, 4.2)),
+          )
+        : sampleTextPositions(
+            req.text,
+            count,
+            THREE.MathUtils.clamp(visibleWidth * 0.85, 3.4, 7.4),
+          )
+
+    build.then((positions) => {
+      if (!positions || !points.current) {
+        forming.current = false
+        return
+      }
+      const attr = points.current.geometry.getAttribute('aName')
+      attr.array.set(positions)
+      attr.needsUpdate = true
+      sceneState.formationTag = req.tag
+      sceneState.nameMix = 1
+      setTimeout(() => {
+        sceneState.nameMix = 0
+        if (req.tag === 'heart') sceneState.shockRequest = { x: 0, y: 0.1 }
+        forming.current = false
+      }, (req.hold || 1.8) * 1000 + 1300)
+    })
+  }
+
   useFrame((state, delta) => {
     const u = material.current.uniforms
     const dt = Math.min(delta, 1 / 30)
+    consumeFormation()
     u.uTime.value += dt
     u.uSize.value = 1.6 * state.viewport.dpr
 
