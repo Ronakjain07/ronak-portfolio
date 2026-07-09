@@ -180,6 +180,7 @@ export default function Particles() {
             req.text,
             count,
             THREE.MathUtils.clamp(visibleWidth * 0.85, 3.4, 7.4),
+            req.y ?? 0.35, // some eggs form lower to dodge page content
           )
 
     build.then((positions) => {
