@@ -1669,8 +1669,25 @@ main {
 
 .achievement-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem;
+}
+
+.achievement-cert {
+  display: inline-block;
+  margin-top: 1.3rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 1px solid rgba(238, 185, 107, 0.4);
+  padding-bottom: 0.3em;
+  transition: border-color 0.3s;
+}
+
+.achievement-cert:hover {
+  border-color: var(--accent);
 }
 
 .achievement-card {
@@ -1930,6 +1947,10 @@ main {
 @media (max-width: 1024px) {
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .achievement-grid {
+    grid-template-columns: 1fr;
   }
 
   .stats-grid {

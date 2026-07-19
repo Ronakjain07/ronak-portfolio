@@ -98,8 +98,8 @@ export default function Contact() {
               {social.label} ↗
             </a>
           ))}
-          <a href={profile.resumeUrl} download data-cursor="PDF ↓">
-            Résumé ↓
+          <a href={profile.resumeUrl} target="_blank" rel="noreferrer" data-cursor="View ↗">
+            Résumé ↗
           </a>
         </div>
       </div>

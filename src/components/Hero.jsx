@@ -108,9 +108,10 @@ export default function Hero({ ready }) {
             <a
               className="btn btn-ghost"
               href={profile.resumeUrl}
-              download
+              target="_blank"
+              rel="noreferrer"
               data-magnetic="0.25"
-              data-cursor="PDF ↓"
+              data-cursor="View ↗"
             >
               Résumé
             </a>

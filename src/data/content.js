@@ -34,40 +34,50 @@ export const profile = {
     { label: 'Email', url: 'mailto:ronaktjain07@gmail.com' },
     { label: 'Instagram', url: 'https://www.instagram.com/ronak_jainnn/' },
   ],
-  resumeUrl: '/Ronak_Jain_Resume.pdf',
+  resumeUrl: 'https://drive.google.com/file/d/1P3oRGtQPjtkqoHmiFDh-_wuB9BnRPkaz/view?usp=sharing',
 }
 
 export const skillGroups = [
   {
-    title: 'AI & LLMs',
-    items: ['OpenAI API', 'Prompt Engineering', 'LLM Integrations', 'Conversational AI', 'Agentic Workflows'],
-  },
-  {
-    title: 'Automation & Scripting',
-    items: ['Workflow Automation', 'Python', 'REST APIs', 'WebSockets'],
+    title: 'AI & GenAI',
+    items: [
+      'LLMs', 'Agentic RAG', 'Tool Calling', 'Prompt Engineering', 'OpenAI API',
+      'Conversational AI', 'Ollama', 'Claude Code', 'Cursor', 'Grok',
+    ],
   },
   {
     title: 'Frontend',
-    items: ['React', 'Next.js', 'TailwindCSS', 'HTML5', 'CSS3'],
+    items: ['React', 'Next.js', 'Angular', 'TailwindCSS', 'HTML5', 'CSS3', 'Responsive UI'],
   },
   {
-    title: 'Backend & Data',
-    items: ['Node.js', 'PostgreSQL', 'SQL', 'Firebase', 'Supabase'],
+    title: 'Backend & APIs',
+    items: ['FastAPI', 'Node.js', 'Express', 'REST APIs', 'JWT', 'API Integration', 'WebSockets'],
+  },
+  {
+    title: 'Databases',
+    items: [
+      'PostgreSQL', 'MongoDB', 'Firebase', 'Supabase',
+      'Data Modeling', 'Query Optimization', 'SQL Workflows',
+    ],
   },
   {
     title: 'Languages',
-    items: ['Python', 'JavaScript', 'Java', 'C++', 'C'],
+    items: ['Python', 'JavaScript', 'TypeScript', 'SQL', 'Java', 'C++'],
   },
   {
-    title: 'Tools & Platforms',
-    items: ['Git & GitHub', 'Vercel', 'CI/CD', 'Figma', 'Arduino & RFID'],
+    title: 'Engineering Practices',
+    items: [
+      'DSA', 'OOP', 'Git', 'Unit Testing', 'Regression Testing',
+      'API Testing', 'UAT', 'Debugging', 'SDLC', 'Agile/Scrum',
+    ],
   },
 ]
 
 export const marqueeSkills = [
-  'OpenAI API', 'Prompt Engineering', 'LLMs', 'Conversational AI', 'Agentic Workflows',
-  'Workflow Automation', 'Python', 'React', 'Next.js', 'Node.js', 'PostgreSQL',
-  'Firebase', 'Supabase', 'Three.js', 'GSAP', 'REST APIs', 'CI/CD', 'Vercel',
+  'LLMs', 'Agentic RAG', 'Tool Calling', 'Prompt Engineering', 'OpenAI API',
+  'Ollama', 'Claude Code', 'Cursor', 'Python', 'TypeScript', 'React', 'Next.js',
+  'Angular', 'FastAPI', 'Node.js', 'Express', 'PostgreSQL', 'MongoDB',
+  'Three.js', 'GSAP', 'REST APIs', 'CI/CD', 'Vercel', 'Figma',
 ]
 
 export const experience = [
@@ -118,7 +128,7 @@ export const projects = [
     description:
       'A professional business website designed and built from scratch — site traffic up 140%, 38 qualified inquiries in 8 weeks, PageSpeed score raised from 67 to 91.',
     tags: ['JavaScript', 'Firebase', 'SEO', 'Hostinger'],
-    url: 'https://www.vhmtex.com/',
+    url: 'https://vhm-tex-website.vercel.app',
     gradient: ['#f5c26b', '#c2542a'],
   },
   {
@@ -162,12 +172,20 @@ export const achievements = [
     org: 'IET',
     description:
       'Took first place for an innovative end-to-end solution, judged on problem-solving, engineering and presentation.',
+    certUrl: 'https://drive.google.com/file/d/1d4UIrobGj84AlfxxabSETrugOJcqUt4J/view?usp=sharing',
   },
   {
     title: 'Best UI/UX — WomenTechies',
     org: 'GDSC VIT',
     description:
       'Awarded for designing the most intuitive, user-friendly and impactful interface at the hackathon.',
+  },
+  {
+    title: 'Scout & Guide',
+    org: 'Vedant International School',
+    description:
+      'Completed the Scout & Guide program — early training in discipline, teamwork and leading under pressure.',
+    certUrl: 'https://drive.google.com/file/d/1G6tpJsqKv0bhfaJ-OPbPJVNMf_rveHiD/view?usp=sharing',
   },
 ]
 

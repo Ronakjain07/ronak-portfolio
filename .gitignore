@@ -10,3 +10,6 @@ IMG_*.jpg
 
 # original Avaturn export — the optimized copy lives in public/avatar.glb
 /model-avatar.glb
+
+# local verification screenshots
+/.shots/
