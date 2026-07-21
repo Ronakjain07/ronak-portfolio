@@ -1,19 +1,15 @@
 import { readFileSync } from 'node:fs'
 
 const html = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8')
-const match = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)
-if (!match) throw new Error('JSON-LD block not found in dist/index.html')
-const data = JSON.parse(match[1])
-console.log(
-  'JSON-LD valid ·',
-  data['@type'],
-  '· person:',
-  data.mainEntity.name,
-  '·',
-  data.mainEntity.jobTitle,
-  '@',
-  data.mainEntity.worksFor.name,
-  '·',
-  data.mainEntity.knowsAbout.length,
-  'knowsAbout topics',
-)
+const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+if (!blocks.length) throw new Error('no JSON-LD found in dist/index.html')
+
+for (const [, raw] of blocks) {
+  const data = JSON.parse(raw) // throws if malformed
+  const types = (data['@graph'] || [data]).map((n) => n['@type'])
+  const faq = (data['@graph'] || []).find((n) => n['@type'] === 'FAQPage')
+  const person = (data['@graph'] || []).find((n) => n['@type'] === 'Person')
+  console.log('JSON-LD valid ·', types.join(', '))
+  if (person) console.log('  person:', person.name, '·', person.hasOccupation?.name, '· sameAs:', person.sameAs.length)
+  if (faq) console.log('  FAQ questions:', faq.mainEntity.length)
+}

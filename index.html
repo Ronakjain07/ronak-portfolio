@@ -44,55 +44,9 @@
     />
     <meta name="twitter:image" content="https://ronakjainn.netlify.app/og.png" />
 
-    <!-- Structured data: profile page + person (Google rich results) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfilePage",
-        "dateModified": "2026-07-08",
-        "mainEntity": {
-          "@type": "Person",
-          "name": "Ronak Jain",
-          "url": "https://ronakjainn.netlify.app/",
-          "image": "https://ronakjainn.netlify.app/ronak-jain.jpg",
-          "jobTitle": "AI Engineer",
-          "description": "AI Engineer at Yellow.ai and full-stack developer building LLM pipelines, agentic AI workflows and production web applications.",
-          "worksFor": {
-            "@type": "Organization",
-            "name": "Yellow.ai",
-            "url": "https://yellow.ai"
-          },
-          "alumniOf": {
-            "@type": "CollegeOrUniversity",
-            "name": "Vellore Institute of Technology",
-            "url": "https://vit.ac.in"
-          },
-          "email": "mailto:ronaktjain07@gmail.com",
-          "nationality": { "@type": "Country", "name": "India" },
-          "knowsAbout": [
-            "Artificial Intelligence",
-            "Large Language Models",
-            "Prompt Engineering",
-            "Agentic AI",
-            "Conversational AI",
-            "Workflow Automation",
-            "OpenAI API",
-            "React",
-            "Next.js",
-            "Node.js",
-            "Python",
-            "PostgreSQL",
-            "Full-Stack Development",
-            "Three.js"
-          ],
-          "sameAs": [
-            "https://github.com/Ronakjain07",
-            "https://linkedin.com/in/ronak-jain-rj07",
-            "https://www.instagram.com/ronak_jainnn/"
-          ]
-        }
-      }
-    </script>
+    <!-- Structured data (@graph: Person, ProfilePage, WebSite, FAQPage)
+         is generated from src/data/content.js and injected at build time
+         by the seoPrerender() Vite plugin. -->
 
     <!-- Microsoft Clarity (same project as portfolio v1) -->
     <script type="text/javascript">

@@ -1,0 +1,44 @@
+# Ronak Jain — AI Engineer & Full-Stack Developer
+
+> Ronak Jain is an AI Engineer and full-stack developer from India. He is an
+> AI Intern at Yellow.ai and a Computer Science engineer (Blockchain
+> Technology) at VIT Vellore (B.Tech, CGPA 8.72, graduating 2026). He builds
+> LLM pipelines, agentic AI workflows, prompt engineering systems and
+> production web applications.
+
+## About
+
+- **Name:** Ronak Jain
+- **Role:** AI Engineer & Full-Stack Developer
+- **Current:** AI Intern at Yellow.ai (since March 2026)
+- **Education:** B.Tech, Computer Science & Engineering (Blockchain), Vellore Institute of Technology, CGPA 8.72, 2022–2026
+- **Location:** Vellore / Ahmedabad, India
+- **Email:** ronaktjain07@gmail.com
+- **Website:** https://ronakjainn.netlify.app
+
+## Skills
+
+- **AI & GenAI:** LLMs, Agentic RAG, Tool Calling, Prompt Engineering, OpenAI API, Conversational AI, Ollama, Claude Code, Cursor, Grok
+- **Frontend:** React, Next.js, Angular, TailwindCSS, HTML5, CSS3, Responsive UI
+- **Backend & APIs:** FastAPI, Node.js, Express, REST APIs, JWT, API Integration, WebSockets
+- **Databases:** PostgreSQL, MongoDB, Firebase, Supabase, Data Modeling, Query Optimization
+- **Languages:** Python, JavaScript, TypeScript, SQL, Java, C++
+- **Engineering:** DSA, OOP, Git, Unit/Regression/API Testing, UAT, SDLC, Agile/Scrum
+
+## Experience
+
+- **Yellow.ai — AI Intern** (Mar 2026 – present): Building prompts, conversation flows and automations on a leading agentic AI platform; hands-on with production LLM pipelines, prompt engineering and evaluation.
+- **VHM Tex India Pvt. Ltd — Full-Stack Developer Intern** (Jun–Jul 2025): Automated order generation, built inventory management tooling, and developed the SEO-optimised company website (traffic +140%).
+- **Krenko Technologies — Full-Stack Developer Intern** (May–Jun 2025): Shipped 12 responsive React interfaces with AI-assisted workflows; automated CI/CD; +28% engagement, 99.2% uptime.
+- **JTM Textile Industries — SDE Intern** (Jun–Jul 2024): Built an inventory system automating 850+ daily transactions, cutting processing time from 45 to 18 minutes.
+
+## Awards
+
+- Winner — Hack-off V4.0 (IET)
+- Best UI/UX — WomenTechies (GDSC VIT)
+
+## Links
+
+- GitHub: https://github.com/Ronakjain07
+- LinkedIn: https://linkedin.com/in/ronak-jain-rj07
+- Instagram: https://www.instagram.com/ronak_jainnn/
