@@ -99,11 +99,11 @@ export const experience = [
     period: 'May — Jun 2025',
     location: 'Remote',
     points: [
-      'Shipped 12 responsive web layouts in React, lifting user engagement by 28% and cutting page load time by 1.8s through code optimisation.',
-      'Integrated Firebase authentication and REST APIs, with Git + Vercel CI/CD pipelines maintaining 99.2% uptime.',
-      'Translated business requirements into scalable frontend features alongside designers and backend engineers.',
+      'Shipped 12 responsive, high-performance React interfaces using AI-assisted development workflows — lifting user engagement 28% and cutting page load time by 1.8s.',
+      'Automated build-and-deploy with Git + Vercel CI/CD pipelines and integrated Firebase authentication and REST APIs, sustaining 99.2% uptime.',
+      'Translated business requirements into scalable, reusable frontend features while collaborating with designers and backend engineers.',
     ],
-    tags: ['React', 'Firebase', 'REST APIs', 'CI/CD'],
+    tags: ['React', 'AI-Assisted Dev', 'CI/CD Automation', 'REST APIs'],
   },
   {
     company: 'JTM Textile Industries',
@@ -111,11 +111,11 @@ export const experience = [
     period: 'Jun — Jul 2024',
     location: 'Ahmedabad, India',
     points: [
-      'Built a scalable inventory management system handling 850+ daily transactions — stock tracking time dropped from 45 to 18 minutes.',
-      'Architected modular React components that cut new-feature development time by 30%.',
-      'Mobile-first dashboards reduced data-entry errors by 32% and helped win 3 new B2B clients.',
+      'Built a scalable inventory management system that automated 850+ daily transactions — digitising manual stock tracking and cutting processing time from 45 to 18 minutes.',
+      'Architected modular, reusable React components that cut new-feature development time by 30%.',
+      'Automated data validation across mobile-first dashboards, reducing data-entry errors by 32% and helping win 3 new B2B clients.',
     ],
-    tags: ['React', 'Firebase', 'Dashboards', 'B2B'],
+    tags: ['React', 'Workflow Automation', 'Dashboards', 'B2B'],
   },
 ]
 
