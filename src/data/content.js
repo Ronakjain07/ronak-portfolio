@@ -94,6 +94,18 @@ export const experience = [
     tags: ['LLMs', 'Agentic AI', 'Prompt Engineering', 'Automation'],
   },
   {
+    company: 'VHM Tex India Pvt. Ltd',
+    role: 'Full-Stack Developer Intern',
+    period: 'Jun — Jul 2025',
+    location: 'Ahmedabad, India',
+    points: [
+      'Automated the end-to-end order generation workflow, replacing manual paperwork with a digital system that cut processing time and eliminated recurring entry errors.',
+      'Built an inventory management module to track stock and orders in real time, giving the team a single source of truth across the supply chain.',
+      'Designed and developed the company website from scratch with an SEO-optimised structure — lifting site traffic 140% and driving 38 qualified inquiries in 8 weeks.',
+    ],
+    tags: ['Workflow Automation', 'Inventory Systems', 'Web Development', 'SEO'],
+  },
+  {
     company: 'Krenko Technologies',
     role: 'Full-Stack Developer Intern',
     period: 'May — Jun 2025',
