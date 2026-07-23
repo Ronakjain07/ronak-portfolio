@@ -10,14 +10,17 @@ const AvatarCard = lazy(() => import('./AvatarCard'))
 function PhotoFace() {
   return (
     <>
-      <img
-        className="about-photo"
-        src="/ronak-jain.jpg"
-        alt="Ronak Jain — AI Engineer"
-        loading="lazy"
-        width="900"
-        height="912"
-      />
+      <picture>
+        <source srcSet="/ronak-jain.webp" type="image/webp" />
+        <img
+          className="about-photo"
+          src="/ronak-jain.jpg"
+          alt="Ronak Jain — AI Engineer"
+          loading="lazy"
+          width="720"
+          height="730"
+        />
+      </picture>
       <span className="photo-grade" aria-hidden="true" />
     </>
   )

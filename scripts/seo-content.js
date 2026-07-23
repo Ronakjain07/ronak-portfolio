@@ -57,7 +57,7 @@ export function buildContentHtml() {
     .join('')
 
   return `
-    <div id="seo-content" aria-hidden="true" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:normal;border:0;">
+    <div id="seo-content" inert style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:normal;border:0;">
       <h1>${esc(profile.name)} — ${esc(profile.role)} &amp; Full-Stack Developer</h1>
       <p>${esc(profile.intro)}</p>
       <section>

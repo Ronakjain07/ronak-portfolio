@@ -19,6 +19,8 @@ function seoPrerender() {
 export default defineConfig({
   plugins: [react(), seoPrerender()],
   build: {
+    sourcemap: true, // Best Practices: ship source maps for first-party JS
+    target: 'es2022', // avoid shipping legacy transpilation to modern browsers
     rollupOptions: {
       output: {
         // three.js dominates the bundle — splitting vendors keeps
