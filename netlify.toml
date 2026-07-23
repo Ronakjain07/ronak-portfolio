@@ -34,6 +34,10 @@
   for = "/*.svg"
   [headers.values]
     Cache-Control = "public, max-age=2592000"
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 # security headers (Best Practices) — safe for a static SPA; no strict
 # script CSP so the inline analytics + async font swap keep working
