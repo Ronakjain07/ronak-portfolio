@@ -134,6 +134,17 @@ export const experience = [
 export const projects = [
   {
     index: '01',
+    title: 'SiteChat',
+    category: 'AI Chatbot Platform',
+    year: '2026',
+    description:
+      'Turns any website into a branded AI chatbot — dual-engine RAG (zero-hallucination extractive answers or LLM conversation), a smart crawler with headless-browser fallback, and a feedback-driven quality flywheel.',
+    tags: ['Python', 'FastAPI', 'RAG', 'ChromaDB'],
+    url: 'https://github.com/Ronakjain07',
+    gradient: ['#6fe3c9', '#6c5ce7'],
+  },
+  {
+    index: '02',
     title: 'VHM Tex Industries',
     category: 'Business Website',
     year: '2025',
@@ -144,7 +155,7 @@ export const projects = [
     gradient: ['#f5c26b', '#c2542a'],
   },
   {
-    index: '02',
+    index: '03',
     title: 'RFID Vehicle Access',
     category: 'IoT System',
     year: '2025',
@@ -155,7 +166,7 @@ export const projects = [
     gradient: ['#e88b6a', '#7c3fae'],
   },
   {
-    index: '03',
+    index: '04',
     title: 'JTM Inventory Manager',
     category: 'Web Application',
     year: '2024',
@@ -166,7 +177,7 @@ export const projects = [
     gradient: ['#c98bde', '#2f4fd8'],
   },
   {
-    index: '04',
+    index: '05',
     title: 'This Portfolio',
     category: 'Interactive 3D',
     year: '2026',
