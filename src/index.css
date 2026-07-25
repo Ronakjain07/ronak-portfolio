@@ -412,51 +412,62 @@ main {
 }
 
 .preloader-inner {
+  position: relative;
   text-align: center;
-  animation: preloader-in 0.8s var(--ease-out) both;
 }
 
-@keyframes preloader-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* "Molten Ignition" wordmark — same validated clamp/proportions as the
+   footer's closing name (measured in-browser: "RONAK JAIN" ≈ 12.4em in
+   Syne 800) so it never overflows at any viewport width. */
+.preloader-wordmark {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 7.8vw, 7.6rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.preloader-wordmark span {
+  display: block;
+  white-space: nowrap;
+}
+
+.preloader-wordmark-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(236, 231, 223, 0.3);
+}
+
+@supports not (-webkit-text-stroke: 1px black) {
+  .preloader-wordmark-outline {
+    color: rgba(236, 231, 223, 0.16);
   }
 }
 
-.preloader-name {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  color: var(--text);
+.preloader-wordmark-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, #f7ecd9 5%, var(--accent) 55%, #d0662f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  clip-path: inset(0 100% 0 0);
 }
 
 .preloader-role {
-  margin-top: 0.4rem;
+  margin-top: clamp(1.1rem, 3vw, 1.9rem);
   font-size: 0.74rem;
   letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--text-dim);
 }
 
-.preloader-count {
-  margin-top: 2.6rem;
-  font-family: var(--font-display);
-  font-size: clamp(3.4rem, 9vw, 5.5rem);
-  font-weight: 800;
-  line-height: 1;
-  background: linear-gradient(100deg, #f7ecd9, var(--accent) 60%, var(--accent-deep));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.preloader-percent {
-  font-size: 0.45em;
-  font-weight: 600;
+.preloader-embers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 /* ── Custom cursor: "Ember Comet Trail" ───────────────────────
