@@ -13,3 +13,6 @@ IMG_*.jpg
 
 # local verification screenshots
 /.shots/
+/.mob-shots/
+/.preloader-shots/
+/.preview.log

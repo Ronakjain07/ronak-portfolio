@@ -2,6 +2,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { setScene } from '../three/sceneState'
 import { whoosh } from './sound'
+import { sectionHaptic } from './haptics'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -20,6 +21,7 @@ export function initSceneTriggers() {
         if (self.isActive) {
           setScene(Number(section.dataset.scene))
           whoosh() // no-op unless the visitor enabled sound
+          sectionHaptic() // no-op off touch / on iOS
         }
       },
     })

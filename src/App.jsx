@@ -15,6 +15,7 @@ import {
   prefersReducedMotion,
 } from './utils/animations'
 import { tick, thump } from './utils/sound'
+import { tapHaptic } from './utils/haptics'
 import { gyroSupported, gyroNeedsPermission, startGyro, requestGyro } from './utils/gyro'
 import Preloader from './components/Preloader'
 import Cursor from './components/Cursor'
@@ -104,6 +105,7 @@ export default function App() {
         y: -((e.clientY / window.innerHeight) * 2 - 1),
       }
       thump()
+      tapHaptic() // no-op on desktop and on iOS (no Vibration API)
     }
     window.addEventListener('click', onClick, { passive: true })
 

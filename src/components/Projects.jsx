@@ -7,9 +7,11 @@ import { projects } from '../data/content'
 gsap.registerPlugin(ScrollTrigger)
 
 // Desktop: the section pins while oversized project cards scrub
-// horizontally. Mobile: the same cards stack vertically, no pin.
+// horizontally. Mobile: the same cards become a native swipe carousel
+// with snap points — both drive the same 01—0N progress indicator.
 export default function Projects() {
   const section = useRef()
+  const viewport = useRef()
   const track = useRef()
   const fill = useRef()
   const [current, setCurrent] = useState(1)
@@ -40,6 +42,20 @@ export default function Projects() {
       })
     })
 
+    mm.add('(max-width: 1023px)', () => {
+      const el = viewport.current
+      if (!el) return
+      const onScroll = () => {
+        const max = el.scrollWidth - el.clientWidth
+        const progress = max > 0 ? el.scrollLeft / max : 0
+        setCurrent(Math.min(total, 1 + Math.round(progress * (total - 1))))
+        if (fill.current) fill.current.style.transform = `scaleX(${progress})`
+      }
+      el.addEventListener('scroll', onScroll, { passive: true })
+      onScroll()
+      return () => el.removeEventListener('scroll', onScroll)
+    })
+
     return () => mm.revert()
   }, [total])
 
@@ -49,7 +65,7 @@ export default function Projects() {
         <SectionHeading number="04" label="Selected Work" title="Projects with" serif="real impact" />
       </div>
 
-      <div className="work-viewport">
+      <div className="work-viewport" ref={viewport}>
         <div className="work-track" ref={track}>
           {projects.map((project, i) => (
             <article className="work-card fade-up" data-delay={(i % 4) * 0.06} key={project.index}>
@@ -115,7 +131,10 @@ export default function Projects() {
         <span className="work-progress-bar">
           <span className="work-progress-fill" ref={fill} />
         </span>
-        <span className="work-progress-hint">Scroll</span>
+        <span className="work-progress-hint">
+          <span className="hint-desktop">Scroll</span>
+          <span className="hint-touch">Swipe →</span>
+        </span>
       </div>
     </section>
   )

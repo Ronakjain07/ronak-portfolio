@@ -1637,8 +1637,103 @@ main {
   color: #191410;
 }
 
+/* Progress indicator — shared by the mobile swipe carousel and the
+   desktop pinned scrub; only the surrounding layout differs. */
 .work-progress {
-  display: none;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.work-progress-label {
+  min-width: 74px;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.work-progress-bar {
+  position: relative;
+  flex: 1 1 auto;
+  max-width: 220px;
+  height: 1px;
+  background: var(--border);
+}
+
+.work-progress-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.work-progress-hint {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ── Mobile: swipeable snap carousel ───────────────────────────
+   The desktop showpiece is a pinned horizontal scrub; on touch the
+   same cards become a native swipe carousel with snap points, so
+   phones get a tactile gesture instead of a passive vertical stack. */
+@media (max-width: 1023px) {
+  .work-viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .work-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .work-track {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 1rem;
+    width: max-content;
+    max-width: none;
+    margin: 0;
+    /* first/last cards can still center under snap */
+    padding-inline: max(1.4rem, calc((100vw - 82vw) / 2));
+  }
+
+  .work-card {
+    flex: 0 0 auto;
+    width: 82vw;
+    max-width: 420px;
+    scroll-snap-align: center;
+  }
+
+  /* hover lift is meaningless on touch and sticks after tap */
+  .work-card:hover {
+    transform: none;
+  }
+
+  .work-progress {
+    margin: 1.6rem auto 0;
+    padding-inline: clamp(1.4rem, 5vw, 4rem);
+    max-width: 1240px;
+  }
+
+  .hint-desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hint-touch {
+    display: none;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -1680,43 +1775,12 @@ main {
   }
 
   .work-progress {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
     padding-inline: calc(max((100vw - 1240px) / 2, 0px) + clamp(1.4rem, 5vw, 4rem));
     padding-bottom: 2.2rem;
   }
 
-  .work-progress-label {
-    min-width: 74px;
-    font-family: var(--font-display);
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--text-dim);
-  }
-
   .work-progress-bar {
-    position: relative;
     flex: 0 0 220px;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .work-progress-fill {
-    position: absolute;
-    inset: 0;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left center;
-  }
-
-  .work-progress-hint {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--text-dim);
   }
 }
 
@@ -2033,7 +2097,10 @@ main {
     display: flex;
   }
 
-  .timeline::before {
+  /* the dot loses its 5px indent below, so the line follows it — targets
+     .timeline-line (a real element since the scroll-draw was added; the
+     old ::before selector here was dead and left the two misaligned) */
+  .timeline-line {
     left: 4px;
   }
 
