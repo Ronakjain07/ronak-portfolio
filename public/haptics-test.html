@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Haptics diagnostic</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #0a0908; color: #ece7df;
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 24px 18px 60px; max-width: 560px; margin: 0 auto;
+  }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  p.sub { color: #8f887c; font-size: 13px; margin-bottom: 22px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .16em; color: #eeb96b; margin: 26px 0 10px; }
+  .row {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.08); font-size: 14px;
+  }
+  .row span:first-child { color: #cfc8bc; }
+  .v { font-weight: 700; text-align: right; }
+  .ok { color: #7dd97b; } .bad { color: #ff6b6b; } .warn { color: #eeb96b; }
+  button {
+    display: block; width: 100%; margin-top: 10px; padding: 16px;
+    font: 600 15px/1 inherit; color: #191410; background: #eeb96b;
+    border: 0; border-radius: 12px; cursor: pointer;
+  }
+  button.ghost { background: transparent; color: #ece7df; border: 1px solid rgba(255,255,255,.18); }
+  #log {
+    margin-top: 18px; padding: 12px; border-radius: 10px; min-height: 60px;
+    background: rgba(255,255,255,.04); font-family: ui-monospace, monospace;
+    font-size: 12px; color: #cfc8bc; white-space: pre-wrap; word-break: break-word;
+  }
+</style>
+</head>
+<body>
+  <h1>Haptics diagnostic</h1>
+  <p class="sub">Open on the phone that isn't buzzing, then tap the test buttons below.</p>
+
+  <h2>Environment</h2>
+  <div id="env"></div>
+
+  <h2>Live state</h2>
+  <div class="row"><span>userActivation.hasBeenActive</span><span class="v" id="act">—</span></div>
+  <div class="row"><span>document visible</span><span class="v" id="vis">—</span></div>
+
+  <h2>Tests</h2>
+  <button id="t1">1 · Short buzz (200ms)</button>
+  <button id="t2" class="ghost">2 · Simple pattern [100,50,100]</button>
+  <button id="t3" class="ghost">3 · The real ignition crescendo (~1.7s)</button>
+  <button id="t4" class="ghost">4 · Long single buzz (1000ms)</button>
+  <div id="log">Waiting for a test…</div>
+
+<script>
+  var env = document.getElementById('env')
+  var log = document.getElementById('log')
+
+  function row(label, value, cls) {
+    var d = document.createElement('div')
+    d.className = 'row'
+    d.innerHTML = '<span>' + label + '</span><span class="v ' + (cls || '') + '">' + value + '</span>'
+    env.appendChild(d)
+  }
+
+  var hasVibrate = typeof navigator.vibrate === 'function'
+  var coarse = window.matchMedia('(pointer: coarse)').matches
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  var ua = navigator.userAgent
+  var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+
+  row('navigator.vibrate exists', hasVibrate ? 'YES' : 'NO', hasVibrate ? 'ok' : 'bad')
+  row('pointer: coarse (touch)', coarse ? 'YES' : 'NO', coarse ? 'ok' : 'bad')
+  row('prefers-reduced-motion', reduced ? 'REDUCE' : 'no-preference', reduced ? 'warn' : 'ok')
+  row('detected as iOS', isIOS ? 'YES' : 'NO', isIOS ? 'bad' : 'ok')
+  row('userActivation API', navigator.userActivation ? 'present' : 'missing', navigator.userActivation ? 'ok' : 'warn')
+  row('browser', (ua.match(/(SamsungBrowser|Firefox|EdgA?|Chrome|Safari)\/[\d.]+/g) || ['unknown']).join(' · '), '')
+
+  setInterval(function () {
+    document.getElementById('act').textContent = navigator.userActivation
+      ? String(navigator.userActivation.hasBeenActive)
+      : 'n/a'
+    document.getElementById('vis').textContent = document.visibilityState
+  }, 400)
+
+  function run(name, pattern) {
+    var lines = []
+    lines.push('test: ' + name)
+    lines.push('pattern: ' + JSON.stringify(pattern))
+    lines.push('hasBeenActive: ' + (navigator.userActivation ? navigator.userActivation.hasBeenActive : 'n/a'))
+    if (!hasVibrate) {
+      lines.push('RESULT: navigator.vibrate does not exist — this browser cannot vibrate.')
+    } else {
+      try {
+        var r = navigator.vibrate(pattern)
+        lines.push('vibrate() returned: ' + r)
+        lines.push(
+          r
+            ? 'RESULT: the browser ACCEPTED it. If you felt nothing, the block is at the OS level — check system vibration/haptic settings, silent or DND mode, and battery saver.'
+            : 'RESULT: the browser REJECTED it (returned false).'
+        )
+      } catch (e) {
+        lines.push('RESULT: threw — ' + e.message)
+      }
+    }
+    log.textContent = lines.join('\n')
+  }
+
+  document.getElementById('t1').onclick = function () { run('short buzz', 200) }
+  document.getElementById('t2').onclick = function () { run('simple pattern', [100, 50, 100]) }
+  document.getElementById('t3').onclick = function () {
+    run('ignition crescendo', [5,100,6,95,8,90,10,85,12,80,15,75,18,70,22,65,28,60,35,55,45,50,58,45,75,40,100,35,300])
+  }
+  document.getElementById('t4').onclick = function () { run('long single buzz', 1000) }
+</script>
+</body>
+</html>
