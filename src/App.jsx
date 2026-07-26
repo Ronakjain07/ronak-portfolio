@@ -15,7 +15,7 @@ import {
   prefersReducedMotion,
 } from './utils/animations'
 import { tick, thump } from './utils/sound'
-import { tapHaptic } from './utils/haptics'
+import { tapHaptic, ignitionHaptic, armIgnitionHaptic } from './utils/haptics'
 import { gyroSupported, gyroNeedsPermission, startGyro, requestGyro } from './utils/gyro'
 import Preloader from './components/Preloader'
 import Cursor from './components/Cursor'
@@ -151,6 +151,11 @@ export default function App() {
       const beginIntro = () => {
         sceneState.nameMix = 1
         setShowHero(true) // hero timeline starts its 1.9s delay now
+        // phones: a crescendo buzz as the field ignites. On a cold load
+        // this is blocked (no user activation yet), so also arm it to
+        // fire on the visitor's first touch, while particles still hold.
+        ignitionHaptic()
+        armIgnitionHaptic()
         gsap.delayedCall(2.6, () => {
           sceneState.nameMix = 0
           sceneState.formationTag = '' // intro done — eggs may use the slot
