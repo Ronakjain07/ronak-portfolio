@@ -169,7 +169,7 @@ export function buildJsonLd() {
     mainEntity: [
       {
         q: 'Who is Ronak Jain?',
-        a: `Ronak Jain is an AI Engineer and full-stack developer from India. He is an AI Intern at Yellow.ai and a Computer Science engineer (Blockchain Technology) at VIT Vellore with a CGPA of 8.72, graduating in 2026. He builds LLM pipelines, agentic AI workflows and production web applications.`,
+        a: `Ronak Jain is an AI Engineer and full-stack developer from India. He is an AI Intern at Yellow.ai and a Computer Science engineer (Blockchain Technology) at VIT Vellore with a CGPA of 8.76, graduating in 2026. He builds LLM pipelines, agentic AI workflows and production web applications.`,
       },
       {
         q: 'What does Ronak Jain do?',

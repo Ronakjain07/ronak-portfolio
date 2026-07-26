@@ -1,9 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 //  All portfolio content lives here — edit this file to update
 //  the site without touching any component code.
-//
-//  TODO(Ronak): the Yellow.ai bullets are intentionally general —
-//  swap in specifics (what you built, tools, numbers) when ready.
 // ─────────────────────────────────────────────────────────────
 
 export const profile = {
@@ -18,12 +15,12 @@ export const profile = {
   intro:
     'I build intelligent products end-to-end — LLM pipelines, agentic workflows and the full-stack engineering that ships them. Currently doing exactly that at Yellow.ai.',
   about: [
-    "I'm Ronak Jain — an AI Intern at Yellow.ai, one of the world's leading agentic AI platforms, and a Computer Science engineer (Blockchain Technology) at VIT Vellore, CGPA 8.72. I work where LLMs meet production: prompts, pipelines, evaluations, and the full-stack scaffolding that turns models into real products.",
+    "I'm Ronak Jain — an AI Intern at Yellow.ai, one of the world's leading agentic AI platforms, and a Computer Science engineer (Blockchain Technology) at VIT Vellore, CGPA 8.76. I work where LLMs meet production: prompts, pipelines, evaluations, and the full-stack scaffolding that turns models into real products.",
     'My toolkit pairs the AI layer — OpenAI API, prompt engineering, conversational flows, workflow automation, Python — with a solid engineering base: React, Node.js, PostgreSQL and Firebase. That combination is why my work ships: I have cut page loads by nearly 2 seconds, lifted engagement 28%, and replaced 45-minute manual workflows with 18-minute automated ones.',
     'Away from the editor you’ll find me at hackathons — where I’ve taken home a win at Hack-off V4.0 and the Best UI/UX award at WomenTechies.',
   ],
   stats: [
-    { value: 8.72, decimals: 2, suffix: '', label: 'CGPA at VIT Vellore' },
+    { value: 8.76, decimals: 2, suffix: '', label: 'CGPA at VIT Vellore' },
     { value: 15, decimals: 0, suffix: '+', label: 'Projects & layouts shipped' },
     { value: 2, decimals: 0, suffix: '', label: 'Hackathon awards' },
     { value: 99.2, decimals: 1, suffix: '%', label: 'Deployment uptime maintained' },
@@ -87,11 +84,11 @@ export const experience = [
     period: 'Mar 2026 — Present',
     location: 'India',
     points: [
-      'Working on one of the world’s leading agentic AI platforms — building prompts, conversation flows and automations that power enterprise customer experiences at scale.',
-      'Hands-on with production LLM pipelines: prompt engineering, evaluation and integration of models into real customer-facing workflows.',
-      'Collaborating with engineering and product teams shipping AI features used by global brands.',
+      'Built internal test-automation tooling for conversational AI agents — automating regression and flow validation that previously ran manually, tightening release confidence across client deployments.',
+      'Engineered prompts, conversation flows and workflow automations on Yellow.ai’s agentic AI platform for enterprise clients including Royal Enfield, KTM and MYK.',
+      'Worked hands-on with production LLM pipelines — prompt engineering, evaluation and model integration — shipping customer-facing AI features alongside engineering and product teams.',
     ],
-    tags: ['LLMs', 'Agentic AI', 'Prompt Engineering', 'Automation'],
+    tags: ['LLMs', 'Agentic AI', 'Prompt Engineering', 'Test Automation'],
   },
   {
     company: 'VHM Tex India Pvt. Ltd',
@@ -204,10 +201,10 @@ export const achievements = [
       'Awarded for designing the most intuitive, user-friendly and impactful interface at the hackathon.',
   },
   {
-    title: 'Scout & Guide',
-    org: 'Vedant International School',
+    title: 'Rajya Puraskar — Scouts & Guides',
+    org: 'Governor of Gujarat',
     description:
-      'Completed the Scout & Guide program — early training in discipline, teamwork and leading under pressure.',
+      'Received the prestigious Rajya Puraskar from the Honourable Governor of Gujarat for excellence in scouting, community service and leadership — completing all state-level requirements while contributing to social initiatives and national service awareness programs.',
     certUrl: 'https://drive.google.com/file/d/1G6tpJsqKv0bhfaJ-OPbPJVNMf_rveHiD/view?usp=sharing',
   },
 ]
@@ -216,7 +213,7 @@ export const education = {
   school: 'Vellore Institute of Technology',
   degree: 'B.Tech — Computer Science & Engineering (Blockchain Technology)',
   period: '2022 — 2026',
-  detail: 'CGPA 8.72',
+  detail: 'CGPA 8.76',
 }
 
 export const navLinks = [
