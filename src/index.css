@@ -1146,11 +1146,35 @@ main {
   }
 }
 
+/* The ember globe sits directly behind this copy, so the text needs its
+   own ground. A soft radial scrim darkens the area and fades to nothing
+   at the edges — readable, without reading as a hard UI panel or hiding
+   the particles. */
+.about-body {
+  position: relative;
+}
+
+.about-body::before {
+  content: '';
+  position: absolute;
+  inset: -2.5rem -3rem;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 78% 62% at 45% 48%,
+    rgba(10, 9, 8, 0.94) 0%,
+    rgba(10, 9, 8, 0.88) 42%,
+    rgba(10, 9, 8, 0.6) 72%,
+    rgba(10, 9, 8, 0) 100%
+  );
+}
+
 .about-para {
   font-size: 1.06rem;
   line-height: 1.8;
   color: var(--text-mid);
   margin-bottom: 1.5rem;
+  text-shadow: 0 1px 12px rgba(10, 9, 8, 0.85);
 }
 
 .about-para:first-child {
@@ -1182,7 +1206,7 @@ main {
 .about-edu-degree {
   margin-top: 0.25rem;
   font-size: 0.95rem;
-  color: var(--text-dim);
+  color: var(--text-mid);
 }
 
 .stats-grid {

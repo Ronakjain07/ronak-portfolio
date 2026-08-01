@@ -11,7 +11,7 @@
 // dim keeps the field from overpowering text-dense sections.
 export const SCENES = [
   { morph: 0, colorA: '#ffd27d', colorB: '#ff7847', spin: 0.05, dim: 1 }, // hero — golden dunes
-  { morph: 1, colorA: '#ffc078', colorB: '#e0529c', spin: 0.1, dim: 0.8 }, // about — ember globe
+  { morph: 1, colorA: '#ffc078', colorB: '#e0529c', spin: 0.1, dim: 0.55 }, // about — ember globe (dimmed: sits behind body copy)
   { morph: 1, colorA: '#ff9d7a', colorB: '#c95cff', spin: 0.24, dim: 0.55 }, // skills — spinning globe
   { morph: 2, colorA: '#ff8f70', colorB: '#9d5cff', spin: 0.12, dim: 0.6 }, // experience — helix
   { morph: 3, colorA: '#c9a2ff', colorB: '#5c7cff', spin: 0.18, dim: 0.65 }, // work — vortex ring
