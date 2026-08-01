@@ -15,8 +15,12 @@ function Rig() {
     // tilt steers the camera on touch devices; mouse everywhere else
     const camX = sceneState.gyro.active ? sceneState.gyro.x : sceneState.mouse.x
     const camY = sceneState.gyro.active ? sceneState.gyro.y : sceneState.mouse.y
-    cam.position.x = THREE.MathUtils.damp(cam.position.x, camX * 0.85, 2.2, dt)
-    cam.position.y = THREE.MathUtils.damp(cam.position.y, -camY * 0.55, 2.2, dt)
+    // Hold the camera nearly still while a word is formed: the text is
+    // sized to ~85% of the visible width, so a full 0.85-unit parallax
+    // swing would carry its outer letters off a phone screen.
+    const settle = 1 - sceneState.nameMix * 0.85
+    cam.position.x = THREE.MathUtils.damp(cam.position.x, camX * 0.85 * settle, 2.2, dt)
+    cam.position.y = THREE.MathUtils.damp(cam.position.y, -camY * 0.55 * settle, 2.2, dt)
     cam.lookAt(0, 0, 0)
 
     // consume a pending click-shock: unproject its NDC onto the z=0 plane

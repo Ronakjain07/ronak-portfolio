@@ -105,6 +105,11 @@ const fragmentShader = /* glsl */ `
   }
 `
 
+// The preloader wordmark already says the name, so the particle
+// formation greets instead of repeating it — "hello world" being the
+// first program every developer writes.
+const INTRO_WORD = 'HELLO WORLD'
+
 const Y_AXIS = new THREE.Vector3(0, 1, 0)
 const pointerLocal = new THREE.Vector3()
 const shockLocal = new THREE.Vector3()
@@ -120,16 +125,18 @@ export default function Particles() {
     return { ...shapes, name: new Float32Array(shapes.burst) }
   }, [count])
 
-  // Sample "RONAK" once fonts are ready and swap it into the aName
-  // attribute. No minimum-width floor: on phones the old 3.4-unit floor
-  // exceeded the visible width and clipped the letters at the edges.
+  // Sample the intro word once fonts are ready and swap it into the
+  // aName attribute. The preloader already spells the name, so this
+  // moment greets instead of repeating it. No minimum-width floor: on
+  // phones the old 3.4-unit floor exceeded the visible width and
+  // clipped the letters at the edges.
   useEffect(() => {
     let cancelled = false
     const aspect = window.innerWidth / Math.max(window.innerHeight, 1)
     const visibleWidth = 2 * Math.tan(THREE.MathUtils.degToRad(55 / 2)) * 7 * aspect
     const worldWidth = Math.min(visibleWidth * 0.85, 7.4)
 
-    sampleTextPositions('RONAK', count, worldWidth).then((positions) => {
+    sampleTextPositions(INTRO_WORD, count, worldWidth).then((positions) => {
       window.__nameSampled = !!positions // verification hook for headless checks
       if (positions) {
         // diagnostic bounds — cheap, and invaluable when a device renders
