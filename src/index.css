@@ -1209,9 +1209,12 @@ main {
   color: var(--text-mid);
 }
 
+/* minmax(0, 1fr) not plain 1fr: a bare 1fr floors at min-content, so a
+   wide value like "99.2%" stretches its own column wider than the rest
+   and pushes the row past the container, clipping the suffix. */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
@@ -1221,15 +1224,20 @@ main {
 
 .stat {
   background: var(--bg);
-  padding: clamp(1.6rem, 3vw, 2.4rem);
+  padding: clamp(1.6rem, 3vw, 2.1rem);
 }
 
+/* Max capped at 2.6rem, not 3rem: at ≥1280px this is a 4-column row and
+   "99.2%" in Syne 800 is ~4.8em, which at 3rem ran into the cell divider. */
 .stat-value {
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 4.5vw, 3rem);
+  font-size: clamp(2.1rem, 4.5vw, 2.6rem);
   font-weight: 800;
   line-height: 1;
   color: var(--accent);
+  /* fixed-width digits — otherwise every frame of the count-up reflows
+     the number and it visibly jitters while animating */
+  font-variant-numeric: tabular-nums;
 }
 
 .stat-label {
@@ -2097,7 +2105,7 @@ main {
   }
 
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .about-grid {
@@ -2203,7 +2211,21 @@ main {
   }
 
   .stats-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat {
+    padding: 1.35rem 1.15rem;
+  }
+
+  /* the widest value ("99.2%") is ~5em of Syne 800 — this keeps it
+     inside the narrowed cell instead of clipping the suffix */
+  .stat-value {
+    font-size: clamp(1.45rem, 6vw, 2.1rem);
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
   }
 
   .contact-mail {
