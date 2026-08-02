@@ -2160,22 +2160,100 @@ main {
     left: 4px;
   }
 
-  .timeline-item {
-    grid-template-columns: 14px 1fr;
-    grid-template-areas:
-      'marker meta'
-      'marker card';
-    gap: 1.1rem 1.4rem;
+  /* ── Sticky stacking deck ──────────────────────────────────
+     Four roles stacked vertically is a lot of phone scrolling, so each
+     card sticks to the top and the next slides up over it, compressing
+     the section into a deck. Cards are opaque and staggered a few px
+     apart so the ones underneath peek out like a real stack. */
+  .timeline {
+    gap: 0.85rem;
   }
 
-  .timeline-dot {
-    margin-left: 0;
+  /* No negative margin between cards, however tempting: a card is only
+     ever visible from its own top down to wherever the next card sits,
+     so ANY overlap permanently hides that much of its tail. Measured at
+     -340px it buried ~300px — the last bullet of every role. Height is
+     cut by tightening the card instead, which costs nothing. */
+  .timeline-item {
+    padding: 1.15rem 1.05rem;
+  }
+
+  .timeline-role {
+    font-size: 1.12rem;
+  }
+
+  .timeline-company {
+    font-size: 0.82rem;
+  }
+
+  .timeline-points {
+    margin-top: 0.85rem;
+    gap: 0.5rem;
+  }
+
+  .timeline-points li {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    padding-left: 1.25rem;
+  }
+
+  .timeline-card .tag-list {
+    margin-top: 0.9rem;
+    gap: 0.4rem;
+  }
+
+  .timeline-card .tag-list li {
+    font-size: 0.66rem;
+    padding: 0.28em 0.75em;
+  }
+
+  /* the spine and dots belong to the desktop timeline, not the deck */
+  .timeline-line,
+  .timeline-marker {
+    display: none;
+  }
+
+  .timeline-item {
+    position: sticky;
+    display: block;
+    padding: 1.35rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    /* opaque: a translucent card would show the one stacked beneath it */
+    background: #0f0d0b;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  /* each sticks slightly lower than the last, leaving a visible sliver */
+  .timeline-item:nth-of-type(1) { top: 78px; z-index: 1; }
+  .timeline-item:nth-of-type(2) { top: 90px; z-index: 2; }
+  .timeline-item:nth-of-type(3) { top: 102px; z-index: 3; }
+  .timeline-item:nth-of-type(4) { top: 114px; z-index: 4; }
+  .timeline-item:nth-of-type(5) { top: 126px; z-index: 5; }
+
+  /* the card is now the item itself — strip its own chrome */
+  .timeline-card {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .timeline-card:hover {
+    transform: none;
+  }
+
+  .timeline-item.is-lit {
+    border-color: rgba(238, 185, 107, 0.28);
   }
 
   .timeline-meta {
     display: flex;
     align-items: baseline;
     gap: 1.2rem;
+    margin-bottom: 0.5rem;
   }
 
   .project-row {
