@@ -15,9 +15,9 @@ export const profile = {
   intro:
     'I build intelligent products end-to-end — LLM pipelines, agentic workflows and the full-stack engineering that ships them. Currently doing exactly that at Yellow.ai.',
   about: [
-    "I'm Ronak Jain — an AI Intern at Yellow.ai, one of the world's leading agentic AI platforms, and a Computer Science engineer (Blockchain Technology) at VIT Vellore, CGPA 8.76. I work where LLMs meet production: prompts, pipelines, evaluations, and the full-stack scaffolding that turns models into real products.",
-    'My toolkit pairs the AI layer — OpenAI API, prompt engineering, conversational flows, workflow automation, Python — with a solid engineering base: React, Node.js, PostgreSQL and Firebase. That combination is why my work ships: I have cut page loads by nearly 2 seconds, lifted engagement 28%, and replaced 45-minute manual workflows with 18-minute automated ones.',
-    'Away from the editor you’ll find me at hackathons — where I’ve taken home a win at Hack-off V4.0 and the Best UI/UX award at WomenTechies.',
+    "I'm Ronak — an AI engineer who's just as interested in the business as the build. At Yellow.ai I work on one of the world's leading agentic AI platforms, engineering prompts, conversation flows and test-automation tooling for enterprise customer experiences.",
+    'I learned how companies actually run by working inside them. On textile factory floors I sat with owners and operators, mapped how orders, stock and supply chains really move, and turned that into software — 850 transactions a day automated, stock checks cut from 45 minutes to 18, data-entry errors down 32%, and three new B2B clients won off the back of it.',
+    'That’s the part I find genuinely interesting: margins, operations, and what actually makes a customer say yes. I’m as curious about how a business gets built as how a system does — because software that doesn’t move a number is just a demo. I’m finishing a B.Tech in Computer Science (Blockchain Technology) at VIT Vellore with a CGPA of 8.76, and what I want to build next is products of my own — ones with customers, not just repositories.',
   ],
   stats: [
     { value: 8.76, decimals: 2, suffix: '', label: 'CGPA at VIT Vellore' },
