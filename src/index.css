@@ -34,6 +34,11 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* Reserve the scrollbar gutter permanently. The preloader locks
+     scrolling with overflow:hidden, which removes the scrollbar and then
+     restores it on release — without this the layout (and the WebGL
+     canvas sized from it) jumps sideways at that exact moment. */
+  scrollbar-gutter: stable;
 }
 
 html.lenis,
@@ -189,9 +194,21 @@ html {
 
 /* ── Layers ────────────────────────────────────────────────── */
 
+/* Height is pinned to the LARGE viewport, not `inset: 0`.
+   On phones the address bar collapses the moment scrolling unlocks after
+   the preloader, which grows the viewport, resizes this container, and
+   makes R3F rebuild the canvas at a new size — the particle field visibly
+   re-scales, reading as the whole screen zooming. 100lvh is the height
+   with browser UI hidden, so the canvas is sized once and never changes;
+   while the bar is visible its bottom simply sits behind it, which is
+   invisible for a full-bleed background. */
 .webgl {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh; /* fallback for browsers without large-viewport units */
+  height: 100lvh;
   z-index: 0;
   pointer-events: none;
 }
