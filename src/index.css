@@ -1167,6 +1167,13 @@ main {
    own ground. A soft radial scrim darkens the area and fades to nothing
    at the edges — readable, without reading as a hard UI panel or hiding
    the particles. */
+/* The scrim below bleeds past this column by design; without clipping it
+   widens the document, and mobile browsers respond by shrink-to-fit
+   zooming the whole page out. */
+.about {
+  overflow-x: clip;
+}
+
 .about-body {
   position: relative;
 }

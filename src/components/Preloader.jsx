@@ -141,13 +141,15 @@ export default function Preloader({ onComplete }) {
     }
 
     const tl = gsap.timeline()
-    tl.fromTo(root.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5, ease: 'power2.out' })
-      .fromTo(
-        wordmark.current,
-        { autoAlpha: 0, scale: 0.94 },
-        { autoAlpha: 1, scale: 1, duration: 0.6, ease: 'power3.out' },
-        '-=0.1',
-      )
+    // The backdrop is NEVER faded in: it must be opaque from the very
+    // first painted frame, or the hero sitting behind it flashes into
+    // view for the length of the fade before the loader covers it.
+    // Only the inner content animates in.
+    tl.fromTo(
+      wordmark.current,
+      { autoAlpha: 0, scale: 0.94 },
+      { autoAlpha: 1, scale: 1, duration: 0.6, ease: 'power3.out' },
+    )
       .fromTo(
         fill.current,
         { clipPath: 'inset(0 100% 0 0)' },
